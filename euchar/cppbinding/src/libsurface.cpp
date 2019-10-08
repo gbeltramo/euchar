@@ -172,7 +172,7 @@ vector<vector<int>> images_3d(py::array_t<int> input1,
                    These can be used to obtain thresholded neigh of
                    padded2 used to compute all the euler changes
                    along a row of the euler surface.*/ 
-                vector<int> indices_row(10, M2+1);
+                vector<int> indices_row(28, M2+1);  // 28=3^3+1
                 int central_voxel2 = padded2[i][j][k];
                 
                 for (size_t p = 0; p < 3; ++p) {

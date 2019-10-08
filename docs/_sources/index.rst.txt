@@ -3,16 +3,44 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to euchar's documentation!
-==================================
+Welcome to **euchar**'s documentation!
+============================================
+
+This is the documentation of the ``euchar`` Python package.
+
+``euchar`` provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.
+
+Installation
+--------------
+
+This package requirements are
+
+- ``CMake`` version >= 3.1
+- ``numpy``
+- ``matplotlib``, used in the ``display`` module of the package
+- ``scipy``, used to obtain Delaunay triangulations of 2D and 3d finite point sets
+- ``scikit-learn``, for nearest neighbours alogrithm
+
+The package can be installed via ``pip`` with
+
+``$ pip install euchar``
+
+Examples
+----------
+
+See the ``github`` page of the package at ``https://github.com/gbeltramo/euchar``.
+  
+Examples can be found in the ``/notebooks/`` directory in the form of Jupyter notebooks.
+
 
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
 
+    utils
     curve
-    cppbinding
-    
+    filtrations
+	      
 Indices and tables
 ==================
 

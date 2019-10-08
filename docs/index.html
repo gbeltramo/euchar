@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Euler characteristic curves" href="curve.html" />
+    <link rel="next" title="Utility functions" href="utils.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -32,17 +32,40 @@
           <div class="body" role="main">
             
   <div class="section" id="welcome-to-euchar-s-documentation">
-<h1>Welcome to euchar’s documentation!<a class="headerlink" href="#welcome-to-euchar-s-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to <strong>euchar</strong>’s documentation!<a class="headerlink" href="#welcome-to-euchar-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation of the <code class="docutils literal notranslate"><span class="pre">euchar</span></code> Python package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This package requirements are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> version &gt;= 3.1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, used in the <code class="docutils literal notranslate"><span class="pre">display</span></code> module of the package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code>, used to obtain Delaunay triangulations of 2D and 3d finite point sets</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, for nearest neighbours alogrithm</p></li>
+</ul>
+<p>The package can be installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code> with</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">euchar</span></code></p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>See the <code class="docutils literal notranslate"><span class="pre">github</span></code> page of the package at <code class="docutils literal notranslate"><span class="pre">https://github.com/gbeltramo/euchar</span></code>.</p>
+<p>Examples can be found in the <code class="docutils literal notranslate"><span class="pre">/notebooks/</span></code> directory in the form of Jupyter notebooks.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cppbinding.html">C++ binding - Utils</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a><ul class="simple">
 </ul>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -73,15 +96,16 @@
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cppbinding.html">C++ binding - Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="curve.html" title="next chapter">Euler characteristic curves</a></li>
+      <li>Next: <a href="utils.html" title="next chapter">Utility functions</a></li>
   </ul></li>
 </ul>
 </div>

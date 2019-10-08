@@ -1,5 +1,5 @@
-Euler characteristic curves
-===========================
+Euler characteristic curves functions
+=======================================
 
 Contents:
 

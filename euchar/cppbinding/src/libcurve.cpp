@@ -1,8 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>     // py::array_t<>
-#include <numeric>      // std::partial_su, std::iota
-#include <algorithm> // std::copy, std::lower_bound
+#include <numeric>              // std::partial_su, std::iota
+#include <algorithm>            // std::copy, std::lower_bound
 #include <vector>
 #include "libutils.hpp"
 #include <cstdio>
@@ -122,6 +122,45 @@ vector<int> filtration_2d(const vector<vector<int>> &simplices,
 
     // possible changes due to addition of vertex edge or triangle
     vector<int> possible_changes{1, -1, 1};
+
+    // loop on simplices and update euler curve
+    for (size_t k=0; k < simplices.size(); k++) {
+        vector<int> simpk = simplices[k];
+        size_t dim = dim_simplex(simpk);
+
+        vector<double>::iterator lower;
+        lower = lower_bound(bins.begin(), bins.end(), param[k]);
+        changes[(lower - bins.begin())] += possible_changes[dim];
+
+    }
+
+    int c = changes[0];
+    for (size_t index = 0; index < ecc.size(); index++) {
+        ecc[index] = c + changes[index+1];
+        c = ecc[index];
+    }
+    
+    return ecc;
+}
+
+//================================================
+
+vector<int> filtration_3d(const vector<vector<int>> &simplices,
+                          const vector<double> &param,
+                          vector<double> &bins)
+{
+    size_t nbins(bins.size());
+    vector<int> changes(nbins, 0);
+    vector<int> ecc(nbins-1, 0);
+    
+    if (simplices.size() != param.size()) {
+        cout << "Simplices and the parametrization must have";
+        cout << " same number of elements." << endl;
+        return ecc;
+    }
+
+    // possible changes due to addition of vertex edge or triangle
+    vector<int> possible_changes{1, -1, 1, -1};
 
     // loop on simplices and update euler curve
     for (size_t k=0; k < simplices.size(); k++) {

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Euler characteristic curves &#8212; euchar 0.1 documentation</title>
+    <title>Euler characteristic curves functions &#8212; euchar 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="C++ binding - Utils" href="cppbinding.html" />
-    <link rel="prev" title="Welcome to euchar’s documentation!" href="index.html" />
+    <link rel="next" title="Filtrations" href="filtrations.html" />
+    <link rel="prev" title="Utility functions" href="utils.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -32,31 +32,54 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="euler-characteristic-curves">
-<h1>Euler characteristic curves<a class="headerlink" href="#euler-characteristic-curves" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="euler-characteristic-curves-functions">
+<h1>Euler characteristic curves functions<a class="headerlink" href="#euler-characteristic-curves-functions" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-euchar.curve"></span><dl class="function">
-<dt id="euchar.curve.complex_2d">
-<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">complex_2d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.complex_2d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="euchar.curve.image_2d">
-<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">image_2d</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">max_intensity=256</em>, <em class="sig-param">vector_of_euler_changes_2d=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.image_2d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Euler characteristic curve of image.</p>
+<dt id="euchar.curve.image_2D">
+<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">image_2D</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">vector_of_euler_changes_2D=None</em>, <em class="sig-param">max_intensity=255</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.image_2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Euler characteristic curve of 2D image.</p>
+<p>This uses the vector of all possible Euler characteristic changes 
+produced by a pixel insertion in 2D images. This is recomputed 
+every time this function is called if it is not passes as a 
+parameter.</p>
 <dl class="simple">
-<dt>image</dt><dd><p>list of lists of integers or two dimensional np.array</p>
+<dt>image</dt><dd><p>list of lists of integers or two dimensional np.array of 
+integers</p>
+</dd>
+<dt>vector_of_euler_changes_2D</dt><dd><p>list of integers, precomputed Euler characteristic changes
+produced by a single pixel insertion</p>
 </dd>
 <dt>max_intensity</dt><dd><p>maximum value of any input of the form of image</p>
 </dd>
-<dt>vector_of_euler_changes_2d</dt><dd><p>list of integers, precomputed Euler characteristic changes
-produced by a single pixel insertion</p>
+</dl>
+<dl class="simple">
+<dt>euler_char_curve</dt><dd><p>np.array of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.curve.image_3D">
+<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">image_3D</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">vector_of_euler_changes_3D=None</em>, <em class="sig-param">max_intensity=255</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.image_3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Euler characteristic curve of 3D image.</p>
+<p>This uses the vector of all possible Euler characteristic changes 
+produced by a voxel insertion in 3D images. This is must be passed
+as a parameter.</p>
+<dl class="simple">
+<dt>image</dt><dd><p>list of lists of list of integers or three dimensional 
+np.array of integers</p>
+</dd>
+<dt>vector_of_euler_changes_3D</dt><dd><p>list of integers, precomputed Euler characteristic changes
+produced by a single voxel insertion</p>
+</dd>
+<dt>max_intensity</dt><dd><p>maximum value of any input of the form of image</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>euler_char_curve</dt><dd><p>list of integers</p>
+<dt>euler_char_curve</dt><dd><p>np.array of integers</p>
 </dd>
 </dl>
 </dd></dl>
@@ -87,18 +110,19 @@ produced by a single pixel insertion</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Euler characteristic curves</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Euler characteristic curves functions</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cppbinding.html">C++ binding - Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to euchar’s documentation!</a></li>
-      <li>Next: <a href="cppbinding.html" title="next chapter">C++ binding - Utils</a></li>
+      <li>Previous: <a href="utils.html" title="previous chapter">Utility functions</a></li>
+      <li>Next: <a href="filtrations.html" title="next chapter">Filtrations</a></li>
   </ul></li>
 </ul>
 </div>
