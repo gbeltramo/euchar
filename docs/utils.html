@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Utility functions &#8212; euchar 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Euler characteristic curves functions" href="curve.html" />
+    <link rel="prev" title="Welcome to euchar’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="utility-functions">
+<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-euchar.utils"></span><dl class="function">
+<dt id="euchar.utils.circumcenter_tetra">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_tetra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute circumcenter of 4 points in 3 dimensions.</p>
+<dl class="simple">
+<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>circumcenter</dt><dd><p>np.array, the circumcentre of the four points</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.circumcenter_triangle">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_triangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute circumcentre of 3 points in 2 or 3 dimensions.</p>
+<dl class="simple">
+<dt>A, B, C</dt><dd><p>np.arrays of length equal to the Euclidean dimension.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>circumcentre</dt><dd><p>np.array, the circumcentre of the three points</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.circumradius_tetra">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumradius_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumradius_tetra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute circumradius of 4 points in 3 dimensions.</p>
+<dl class="simple">
+<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>circumradius</dt><dd><p>np.array, the circumradius of the four points</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.circumradius_triangle">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumradius_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumradius_triangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute circumradius of 3 points in 2 or 3 dimensions.</p>
+<dl class="simple">
+<dt>A, B, C</dt><dd><p>np.arrays of length equal to the Eucliean dimension.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>circumradius</dt><dd><p>float, circumradius of the 3 points.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.estimate_density">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">estimate_density</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">n_neighbors</em>, <em class="sig-param">algorithm='ball_tree'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.estimate_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates density at each point in <cite>points</cite>.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>2d array of shape (N, d)</p>
+</dd>
+<dt>n_neighbors</dt><dd><p>number of closest points to consider when estimating the density</p>
+</dd>
+<dt>algorithm</dt><dd><p>string specifying which algorithm the NearestNeighbors class
+from sklearn.neighbors should use</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>param_vertices</dt><dd><p>1d array parametrizing vertices by density. The order is the one of
+indices of vertices (0, 1, 2, …), so parametrized values are unsorted</p>
+</dd>
+</dl>
+<p>This requires scikit-learn to be installed in the current 
+environment.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.parameter_tetrahedron">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">parameter_tetrahedron</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.parameter_tetrahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Alpha filtration parameter of a tetrahedron of vertices p1, p2, p3, p4.</p>
+<dl class="simple">
+<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>parameter</dt><dd><p>float, Alpha filtration parameter of the tetrahedron. This
+is the greatest value among twice the circumradius of the 
+tetrahedron and twice the circumradiuses of the four 
+triangles forming the faces of the tetrahedron.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.parameter_triangle">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">parameter_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.parameter_triangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Alpha filtration parameter of a triangle of vertices A, B, C.</p>
+<dl class="simple">
+<dt>A, B, C</dt><dd><p>np.arrays, the three vertices of the triangle</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>parameter</dt><dd><p>float, Alpha filtration parameter of the triangle. This
+is twice the circumradius of the triangle if this is
+greater than of all the three triangle edges lengths, or
+it is the greatest value among the length of edges of the
+triangle.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.vector_all_euler_changes_in_2D_images">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_2D_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_2D_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a vector of 256 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3 binary neighbourhood.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.vector_all_euler_changes_in_3D_images">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_3D_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_3D_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a vector of 67,108,864 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3x3 binary neighbourhood.</p>
+<p>It is recommended to produce this vector once and to write it 
+to a file. For example with numpy</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector_changes</span> <span class="o">=</span> <span class="n">vector_all_euler_changes_in_3d_images</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;/path/to/dir/changes_3d.npy&quot;</span><span class="p">,</span> <span class="n">vector_changes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next time the vector can be loaded with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector_changes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/path/to/dir/changes_3d.npy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.vol_tetra">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vol_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vol_tetra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Volume of the tetrahedron whose four vertices are the given four points p1, p2, p3, p4.</p>
+<dl class="simple">
+<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>volume</dt><dd><p>float, the volume of the tetrahedron</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">euchar</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to <strong>euchar</strong>’s documentation!</a></li>
+      <li>Next: <a href="curve.html" title="next chapter">Euler characteristic curves functions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Gabriele Beltramo.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

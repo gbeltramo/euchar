@@ -1,0 +1,17 @@
+Filtrations
+===========================
+
+Contents:
+
+.. toctree::
+    :maxdepth: 2
+
+.. automodule:: euchar.filtrations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

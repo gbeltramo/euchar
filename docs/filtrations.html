@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Filtrations &#8212; euchar 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Euler characteristic curves functions" href="curve.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="filtrations">
+<h1>Filtrations<a class="headerlink" href="#filtrations" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-euchar.filtrations"></span><dl class="function">
+<dt id="euchar.filtrations.alpha_filtration_2d">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2d</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">print_info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute sorted simplices and sorted parametrization of 2D 
+point cloud.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>points</dt><dd><p>array of points in 2D</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>sorted_simplices</dt><dd><p>array of integers of shape (N,3) using -1 as placeholder
+Ex. [1,-1,-1] is vertex 1 and [3,5,-1] is edge (3,5).</p>
+</dd>
+<dt>sorted_parametrization</dt><dd><p>array of floats corresponding to the filtration parameter of
+each simplex.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.alpha_filtration_3d">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_3d</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">print_info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return sorted parametrization and sorted simplices.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>array of points in 3D</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>sorted_param</dt><dd><p>array of floats corresponding to the filtration parameter of
+each simplex.</p>
+</dd>
+<dt>sorted_simplices</dt><dd><p>array of integers of shape (N,4) using -1 as placeholder
+Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.delaunay_ed_tri">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.delaunay_ed_tri_tetra">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri_tetra</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri_tetra" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.dimension">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">dimension</code><span class="sig-paren">(</span><em class="sig-param">simplex</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.filter_simplices_on">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">filter_simplices_on</code><span class="sig-paren">(</span><em class="sig-param">vertices</em>, <em class="sig-param">simplices</em>, <em class="sig-param">parametrization</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.filter_simplices_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.fix_indices_param">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">fix_indices_param</code><span class="sig-paren">(</span><em class="sig-param">indices</em>, <em class="sig-param">param</em>, <em class="sig-param">simplices</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.fix_indices_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.magnitude">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">magnitude</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.magnitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">euchar</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Filtrations</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="curve.html" title="previous chapter">Euler characteristic curves functions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Gabriele Beltramo.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/filtrations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
