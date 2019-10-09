@@ -10,10 +10,9 @@ from distutils.version import LooseVersion
 
 
 class CMakeExtension(Extension):
-    def __init__(self, name, path_to_build, sourcedir=''):
+    def __init__(self, name, sourcedir=''):
         Extension.__init__(self, name, sources=[])
-        self.path_to_build = path_to_build
-        self.sourcedir = os.path.abspath(sourcedir)
+        self.sourcedir = sourcedir
 
 
 class CMakeBuild(build_ext):
@@ -33,7 +32,7 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.path_to_build)))
+        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.sourcedir)))
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
                       '-DPYTHON_EXECUTABLE=' + sys.executable]
 
@@ -56,7 +55,7 @@ class CMakeBuild(build_ext):
                                                               self.distribution.get_version())
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
-        subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env)
+        subprocess.check_call(['cmake', os.path.abspath(ext.sourcedir)] + cmake_args, cwd=self.build_temp, env=env)
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 #===========================================================
@@ -65,16 +64,13 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 utils = CMakeExtension(name="utils",
-                       path_to_build="euchar/cppbinding/",
-                       sourcedir="euchar/cppbinding")
+                       sourcedir="euchar/cppbinding/")
 
 curve = CMakeExtension(name="curve",
-                       path_to_build="euchar/cppbinding/",
-                       sourcedir="euchar/cppbinding")
+                       sourcedir="euchar/cppbinding/")
 
 surface = CMakeExtension(name="surface",
-                         path_to_build="euchar/cppbinding/",
-                         sourcedir="euchar/cppbinding")
+                         sourcedir="euchar/cppbinding/")
 setup(
     name='euchar',
     version='0.1',
@@ -85,8 +81,29 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markwdown",
     url="https://github.com/gbeltramo/euchar",
-    install_requires=['numpy', 'matplotlib', 'scipy'],
+    license='MIT',
+    install_requires=[
+        'numpy',
+        'matplotlib',
+        'scipy',
+        'scikit-learn',
+        'pybind11'
+    ],
     ext_modules=[utils, curve, surface],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
+    python_requires='>=2.7,!=3.1,!=3.2,!=3.3,!=3.4',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Education',
+        'Topic :: Scientific/Engineering :: Mathematics',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
+    keywords='topology data analysis, euler characteristic, euler characteristic curve, euler characteristic surface'
 )

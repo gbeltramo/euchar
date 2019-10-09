@@ -2,8 +2,9 @@
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>     // py::array_t<>
 #include <vector>
+#include <algorithm>    // std::lower_bound,
+
 #include "libutils.hpp"
-#include <cstdio>
 
 namespace py = pybind11;
 using namespace std;
@@ -158,9 +159,7 @@ vector<vector<int>> images_3d(py::array_t<int> input1,
 
     // Loop over all pixel in original image
     for (size_t i = 1; i < numI+1; ++i) {
-        printf("i = %zu | ", i);
         for (size_t j = 1; j < numJ+1; ++j) {
-            printf("j = %zu | ", j);
             for (size_t k = 1; k < numK+1; ++k) {
                 int voxel_value1 = padded1[i][j][k];
                 vector<vector<vector<int>>> neigh1 = neigh_voxel_3d(padded1, i, j, k);
@@ -218,6 +217,58 @@ vector<vector<int>> images_3d(py::array_t<int> input1,
     return surface;
 }
 
+//================================================
+
+vector<vector<int>> bifiltration(vector<int>    dim_simplices,
+                                 vector<double> parametrization1,
+                                 vector<double> parametrization2,
+                                 vector<double> bins1,
+                                 vector<double> bins2)
+{
+    size_t num_rows = bins1.size();
+    size_t num_cols = bins2.size();
+
+    vector<vector<int>> euler_char_surface(num_rows, vector<int>(num_cols, 0));
+
+    // we have 4 possible changes, from dim 0 to dim 3 maximum
+    vector<int> possible_changes = {1, -1, 1, -1};
+    
+    size_t number_simplices = dim_simplices.size();
+
+    // loop on simplices
+    for (size_t i = 0; i < number_simplices; ++i) {
+        size_t dim_simplex = dim_simplices[i];
+        double par1 = parametrization1[i];
+        double par2 = parametrization1[i];
+        
+        // find bins indexes
+        vector<double>::iterator lower1;
+        lower1 = lower_bound(bins1.begin(), bins1.end(), par1);
+        size_t index_simplex_in_bins1 = lower1 - bins1.begin();
+
+        vector<double>::iterator lower2;
+        lower2 = lower_bound(bins2.begin(), bins2.end(), par2);
+        size_t index_simplex_in_bins2 = lower2 - bins2.begin();
+
+        // update euler changes along rows
+        for (size_t incr = 0; incr < num_cols; ++incr) {
+            euler_char_surface[index_simplex_in_bins1][index_simplex_in_bins2+incr] += possible_changes[dim_simplex];
+        }
+    }
+
+    //Cumulative sum along columns
+    vector<int> row_before = euler_char_surface[0];
+    for (size_t s = 1; s < num_rows; ++s) {
+        for (size_t t = 0; t < num_cols; ++t) {
+             euler_char_surface[s][t] += row_before[t];
+        }
+        row_before = euler_char_surface[s];
+    }
+
+    return euler_char_surface;
+}
+
+    
 //================================================
 
 vector<vector<int>> bifiltration_2d(vector<double> unsorted_par_vertices,

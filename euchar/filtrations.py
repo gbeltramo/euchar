@@ -1,5 +1,5 @@
 import numpy as np
-from euchar.utils import parameter_triangle, parameter_tetrahedron
+import euchar.utils as u 
 from scipy.spatial import Delaunay, distance
 
 #=================================================
@@ -92,17 +92,10 @@ def filter_simplices_on(vertices, simplices, parametrization):
     return np.array(new_sim), np.array(new_par)
 
 #=================================================
-# Radius triangles and tetrahedra
-#=================================================
-
-def magnitude(v):
-    return np.sqrt(v.dot(v))
-
-#=================================================
 # Filtrations
 #=================================================
 
-def alpha_filtration_2d(points, print_info=False):
+def alpha_filtration_2d(points):
     """Compute sorted simplices and sorted parametrization of 2D 
 point cloud.
     
@@ -125,19 +118,13 @@ point cloud.
     vertices = np.arange(len(points))
     edges, triangles = delaunay_ed_tri(points)
     
-    if print_info:
-        print("edges and triangles done", end=" - ")
-        
     # Pamatrise simplices by max(length(edge)) = Rips
     par_vertices = np.zeros(len(points))
     par_edges = np.array([distance.euclidean(*points[ed])
                           for ed in edges])
-    par_triangles = np.array([parameter_triangle(*points[tri])
+    par_triangles = np.array([u.parameter_triangle(*points[tri])
                               for tri in triangles])
     
-    if print_info:
-        print("parametrizations done", end=" - ")
-        
     # Unsorted simplices using arrays with same sizes.
     vertices = np.array([[v, -1, -1] for v in vertices])
     edges = np.array([[ed[0], ed[1], -1] for ed in edges])
@@ -165,7 +152,7 @@ point cloud.
 
 #=================================================
 
-def alpha_filtration_3d(points, print_info=False):
+def alpha_filtration_3d(points):
     """
     Return sorted parametrization and sorted simplices.
     
@@ -187,21 +174,16 @@ def alpha_filtration_3d(points, print_info=False):
     vertices = np.arange(len(points))
     edges, triangles, tetrahedra = delaunay_ed_tri_tetra(points)
 
-    if print_info:
-        print("edges, triangles, tetrahedra done", end=" - ")
-        
     # Pamatrise simplices by max(length(edge)) = Rips
     par_vertices = np.zeros(len(points))
     par_edges = np.array([distance.euclidean(*points[ed])
                           for ed in edges])
-    par_triangles = np.array([parameter_triangle(*points[tri])
+    par_triangles = np.array([u.parameter_triangle(*points[tri])
                               for tri in triangles])
     
-    par_tetrahedra = np.array([parameter_tetrahedron(*points[tetra])
+    par_tetrahedra = np.array([u.parameter_tetrahedron(*points[tetra])
                            for tetra in tetrahedra])
-    if print_info:
-        print("paramaetrizations done", end=" - ")
-        
+
     # Unsorted simplices using arrays with same sizes. 
     vertices = np.array([[v, -1, -1, -1] for v in vertices])
     edges = np.array([[ed[0], ed[1], -1, -1] for ed in edges])
@@ -224,3 +206,18 @@ def alpha_filtration_3d(points, print_info=False):
     sorted_simplices = fix_indices_param(sorted_indices, sorted_param, sorted_simplices)
 
     return sorted_simplices, sorted_param
+
+#=================================================
+
+def density_filtration(points, simplices, n_neighbors):
+    """Parametrization of simplices based on local density at vertices."""
+
+    density = u.estimate_density(points, n_neighbors)
+
+    parametrization = []
+    
+    for sim in simplices:
+        par = max([density[vertex] for vertex in sim if vertex != -1])
+        parametrization.append(par)
+
+    return np.array(parametrization)

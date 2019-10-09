@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.spatial.distance import euclidean
 from sklearn.neighbors import NearestNeighbors
 from euchar.cppbinding.utils import vector_of_euler_changes_2d, vector_of_euler_changes_3d
 
@@ -67,8 +68,14 @@ def vector_all_euler_changes_in_3D_images():
     print("This may take a while...")
     print("It is recommended to save the result to a file,\n and to load it when needed.")
 
-    list_3d_changes = vector_of_euler_changes_3d()
+    list_3d_changes = vector_of_euler_changes_3d(0, 67_108_864) # 2**26
     return np.array(list_3d_changes)
+
+#=================================================
+
+def magnitude(v):
+    """Euclidean norm of the vector v."""
+    return np.sqrt(v.dot(v))
 
 #=================================================
 
@@ -78,7 +85,7 @@ def circumradius_triangle(A, B, C):
     Parameters
     ----------
     A, B, C
-        np.arrays of length equal to the Eucliean dimension.
+        np.arrays of length equal to the Euclidean dimension.
 
     Return
     ------
@@ -220,9 +227,9 @@ def parameter_triangle(A, B, C):
 
     """
     
-    AB = distance.euclidean(A, B)
-    AC = distance.euclidean(A, C)
-    BC = distance.euclidean(B, C)
+    AB = euclidean(A, B)
+    AC = euclidean(A, C)
+    BC = euclidean(B, C)
     twice_circ_radius_ABC = 2 * circumradius_triangle(A, B, C)
     return max(AB, AC, BC, twice_circ_radius_ABC)
 
@@ -255,3 +262,20 @@ def parameter_tetrahedron(p1, p2, p3, p4):
     return max(twice_circ_radius_tetra, twice_circ_radius_tri123,
                twice_circ_radius_tri124, twice_circ_radius_tri134,
                twice_circ_radius_tri234)
+
+#=================================================
+
+def simplices_to_dimensions(simplices):
+
+    def dim_simplex(sim):
+        cnt = 0
+        for el in sim:
+            if el != 1:
+                cnt += 1
+            else:
+                break
+        return cnt - 1
+
+    return [dim_simplex(item) for item in simplices]
+
+        
