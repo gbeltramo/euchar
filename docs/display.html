@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>&lt;no title&gt; &#8212; euchar 0.1 documentation</title>
+    <title>Euler characteristic plotting &#8212; euchar 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,6 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Filtrations" href="filtrations.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -30,7 +31,75 @@
 
           <div class="body" role="main">
             
-  <p>a</p>
+  <div class="section" id="euler-characteristic-plotting">
+<h1>Euler characteristic plotting<a class="headerlink" href="#euler-characteristic-plotting" title="Permalink to this headline">¶</a></h1>
+<p>The functions in this module use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to produce plots of
+Euler characteristic curves and surfaces.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-euchar.display"></span><dl class="function">
+<dt id="euchar.display.euler_curve_plot">
+<code class="sig-prename descclassname">euchar.display.</code><code class="sig-name descname">euler_curve_plot</code><span class="sig-paren">(</span><em class="sig-param">bins, euler_char_curve, line_color='k', line_width=1, marker='', xlim=None, ylim=None, xticks=[0], yticks=[0], xlabel='Parameter', ylabel='$\\chi(K)$', title='', figsize=(3, 3), font_size=14</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.display.euler_curve_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an Euler characteristic curve as a piecewise constant line.
+Parameters
+———-
+bins</p>
+<blockquote>
+<div><p>np.ndarray, x-axis values of the plot</p>
+</div></blockquote>
+<dl class="simple">
+<dt>euler_char_curve</dt><dd><p>np.ndarray of integers</p>
+</dd>
+<dt>line_color</dt><dd><p>color string, ‘k’ by default.</p>
+</dd>
+<dt>line_width</dt><dd><p>int</p>
+</dd>
+<dt>marker</dt><dd><p>string, can be ‘o’, ‘^’</p>
+</dd>
+<dt>xlim, ylim</dt><dd><p>lists of two int, limits of plot</p>
+</dd>
+<dt>xticks, yticks</dt><dd><p>lists, ticks to plot along axes</p>
+</dd>
+<dt>xlabel, ylabel</dt><dd><p>strings, labels of axes</p>
+</dd>
+<dt>title</dt><dd><p>string</p>
+</dd>
+<dt>figsize</dt><dd><p>two-tuple, default is (3,3)</p>
+</dd>
+<dt>font_size</dt><dd><p>int, default is 14</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.display.euler_surface_plot">
+<code class="sig-prename descclassname">euchar.display.</code><code class="sig-name descname">euler_surface_plot</code><span class="sig-paren">(</span><em class="sig-param">bins1</em>, <em class="sig-param">bins2</em>, <em class="sig-param">euler_char_surf</em>, <em class="sig-param">n_levels=30</em>, <em class="sig-param">dx=0.05</em>, <em class="sig-param">dy=0.05</em>, <em class="sig-param">title='-'</em>, <em class="sig-param">color_map='RdYlBu'</em>, <em class="sig-param">figsize=(3</em>, <em class="sig-param">3)</em>, <em class="sig-param">font_size=14</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.display.euler_surface_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot Euler characteristic surface.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.display.matplotlib_plot">
+<code class="sig-prename descclassname">euchar.display.</code><code class="sig-name descname">matplotlib_plot</code><span class="sig-paren">(</span><em class="sig-param">rows=1</em>, <em class="sig-param">columns=1</em>, <em class="sig-param">figsize=(4</em>, <em class="sig-param">4)</em>, <em class="sig-param">font_size=14</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.display.matplotlib_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a fig and ax object to be opearated on.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.display.piecewise_constant_curve">
+<code class="sig-prename descclassname">euchar.display.</code><code class="sig-name descname">piecewise_constant_curve</code><span class="sig-paren">(</span><em class="sig-param">domain</em>, <em class="sig-param">curve</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.display.piecewise_constant_curve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.display.save">
+<code class="sig-prename descclassname">euchar.display.</code><code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path='unnamed.png'</em>, <em class="sig-param">dpi=200</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.display.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
 
 
           </div>
@@ -50,15 +119,21 @@
 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cppbinding.html">C++ binding - Utils</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Euler characteristic plotting</a><ul class="simple">
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="filtrations.html" title="previous chapter">Filtrations</a></li>
   </ul></li>
 </ul>
 </div>

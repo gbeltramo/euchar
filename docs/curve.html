@@ -37,7 +37,28 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-euchar.curve"></span><dl class="function">
+<span class="target" id="module-euchar.curve"></span><p>Implementation of the Euler characateristic curves algorithms.</p>
+<p>Author: Gabriele Beltramo</p>
+<dl class="function">
+<dt id="euchar.curve.filtration">
+<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">filtration</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">bins</em>, <em class="sig-param">param='alpha'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.filtration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Euler characteristic curve of a finite point set.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>np.ndarray of shape (N,2) or (N,3)</p>
+</dd>
+<dt>bins</dt><dd><p>iterable of sorted floats, used to bin the 
+parametrization values of simplices in the Alpha filtration.</p>
+</dd>
+<dt>param</dt><dd><p>string, ‘alpha’ for Alpha filtration</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_curve</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="euchar.curve.image_2D">
 <code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">image_2D</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">vector_of_euler_changes_2D=None</em>, <em class="sig-param">max_intensity=255</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.image_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Euler characteristic curve of 2D image.</p>
@@ -46,8 +67,7 @@ produced by a pixel insertion in 2D images. This is recomputed
 every time this function is called if it is not passes as a 
 parameter.</p>
 <dl class="simple">
-<dt>image</dt><dd><p>list of lists of integers or two dimensional np.array of 
-integers</p>
+<dt>image</dt><dd><p>np.ndarray of integers</p>
 </dd>
 <dt>vector_of_euler_changes_2D</dt><dd><p>list of integers, precomputed Euler characteristic changes
 produced by a single pixel insertion</p>
@@ -69,8 +89,7 @@ produced by a single pixel insertion</p>
 produced by a voxel insertion in 3D images. This is must be passed
 as a parameter.</p>
 <dl class="simple">
-<dt>image</dt><dd><p>list of lists of list of integers or three dimensional 
-np.array of integers</p>
+<dt>image</dt><dd><p>np.ndarray of integers</p>
 </dd>
 <dt>vector_of_euler_changes_3D</dt><dd><p>list of integers, precomputed Euler characteristic changes
 produced by a single voxel insertion</p>
@@ -79,7 +98,7 @@ produced by a single voxel insertion</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>euler_char_curve</dt><dd><p>np.array of integers</p>
+<dt>euler_char_curve</dt><dd><p>np.ndarray of integers</p>
 </dd>
 </dl>
 </dd></dl>

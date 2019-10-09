@@ -38,7 +38,7 @@
 </div>
 <span class="target" id="module-euchar.filtrations"></span><dl class="function">
 <dt id="euchar.filtrations.alpha_filtration_2d">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2d</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">print_info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2d" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2d</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sorted simplices and sorted parametrization of 2D 
 point cloud.</p>
 <blockquote>
@@ -59,7 +59,7 @@ each simplex.</p>
 
 <dl class="function">
 <dt id="euchar.filtrations.alpha_filtration_3d">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_3d</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">print_info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_3d" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_3d</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return sorted parametrization and sorted simplices.</p>
 <dl class="simple">
 <dt>points</dt><dd><p>array of points in 3D</p>
@@ -86,6 +86,12 @@ Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="euchar.filtrations.density_filtration">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">density_filtration</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">simplices</em>, <em class="sig-param">n_neighbors</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.density_filtration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parametrization of simplices based on local density at vertices.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="euchar.filtrations.dimension">
 <code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">dimension</code><span class="sig-paren">(</span><em class="sig-param">simplex</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.dimension" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -98,11 +104,6 @@ Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
 <dl class="function">
 <dt id="euchar.filtrations.fix_indices_param">
 <code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">fix_indices_param</code><span class="sig-paren">(</span><em class="sig-param">indices</em>, <em class="sig-param">param</em>, <em class="sig-param">simplices</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.fix_indices_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.magnitude">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">magnitude</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.magnitude" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <ul class="simple">

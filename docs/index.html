@@ -33,13 +33,15 @@
             
   <div class="section" id="welcome-to-euchar-s-documentation">
 <h1>Welcome to <strong>euchar</strong>’s documentation!<a class="headerlink" href="#welcome-to-euchar-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p><strong>NOTE: this project is work in progress!</strong></p>
 <p>This is the documentation of the <code class="docutils literal notranslate"><span class="pre">euchar</span></code> Python package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>This package requirements are</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> version &gt;= 3.1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> version &gt;= 3.5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> version &gt;= 2.2</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, used in the <code class="docutils literal notranslate"><span class="pre">display</span></code> module of the package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code>, used to obtain Delaunay triangulations of 2D and 3d finite point sets</p></li>
@@ -61,7 +63,13 @@
 <li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -98,7 +106,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
 </ul>
 
 <div class="relations">

@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Euler characteristic surface functions &#8212; euchar 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Filtrations" href="filtrations.html" />
+    <link rel="prev" title="Euler characteristic curves functions" href="curve.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="euler-characteristic-surface-functions">
+<h1>Euler characteristic surface functions<a class="headerlink" href="#euler-characteristic-surface-functions" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-euchar.surface"></span><p>Implementation of the Euler characateristic surfaces algorithms.</p>
+<p>Author: Gabriele Beltramo</p>
+<dl class="function">
+<dt id="euchar.surface.bifiltration">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">bifiltration</code><span class="sig-paren">(</span><em class="sig-param">simplices</em>, <em class="sig-param">parametrization1</em>, <em class="sig-param">parametrization2</em>, <em class="sig-param">bins1</em>, <em class="sig-param">bins2</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.bifiltration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Euler characteristic surface of bifiltration.</p>
+<dl class="simple">
+<dt>simplices</dt><dd><p>np.ndarray of shape (N, 3) or (N, 4). Each row is a simplex.
+For example [2 4 -1] is the edge (2,4) and [2 4 9] the 
+triangle (2,4,9). Note that the indices of vertices are 
+sorted.</p>
+</dd>
+<dt>parametrization1, parametrization2</dt><dd><p>np.ndarray of sorted floats</p>
+</dd>
+<dt>bins1, bins2</dt><dd><p>np.ndarray of sorted floats, these are used to bin the 
+parametrization values of simplices in the Alpha filtration.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.surface.bifiltration_density">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">bifiltration_density</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">n_neighbors</em>, <em class="sig-param">bins1</em>, <em class="sig-param">bins2</em>, <em class="sig-param">param='alpha'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.bifiltration_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Euler characteristic surface of bifiltration given by
+combining a given parametrized filtration with the filtration
+derived from a density estimate on points.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>np.ndarray of shape (N, 2)</p>
+</dd>
+<dt>n_neighbors</dt><dd><p>int, number of nearest neighbors of a point <cite>p</cite> used to estimate 
+the density at <cite>p</cite>.</p>
+</dd>
+<dt>bins1, bins2</dt><dd><p>iterable of sorted floats, these are used to bin the 
+parametrization values of simplices in the Alpha filtration.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.surface.image_with_function">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">image_with_function</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">iterations</em>, <em class="sig-param">func</em>, <em class="sig-param">max_intensity=255</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.image_with_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Euler characteristic surface of a give image with the
+bi-filtration given by pixel value and iterative application of
+a given function.</p>
+<dl class="simple">
+<dt>image</dt><dd><p>np.ndarray of integers</p>
+</dd>
+<dt>iterations</dt><dd><p>number of times the function is applied to the image.</p>
+</dd>
+<dt>func</dt><dd><p>function taking an image at returning an image of the
+same size. The default is cv2.GaussianBlur, so you
+need to pass something like <cite>**{‘ksize’:(3,3), ‘sigmaX’:1.0}</cite>
+if you do not set this to something else.</p>
+</dd>
+<dt>max_intensity</dt><dd><p>int, maximum pixel value.</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs</dt><dd><p>possible arguments of function <cite>func</cite> passed as a parameter.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.surface.images_2D">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">images_2D</code><span class="sig-paren">(</span><em class="sig-param">image1</em>, <em class="sig-param">image2</em>, <em class="sig-param">vector_of_euler_changes_2D=None</em>, <em class="sig-param">max_intensity1=255</em>, <em class="sig-param">max_intensity2=255</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.images_2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Euler characteristic curve of a pair of 2D images.</p>
+<p>This uses the vector of all possible Euler characteristic changes 
+produced by a pixel insertion in 2D images. This is recomputed 
+every time this function is called if it is not passes as a 
+parameter.</p>
+<dl class="simple">
+<dt>image1, image2</dt><dd><p>np.ndarray of integers</p>
+</dd>
+<dt>vector_of_euler_changes_2D</dt><dd><p>list of integers, precomputed Euler characteristic changes
+produced by a single pixel insertion</p>
+</dd>
+<dt>max_intensity1, max_intensity2</dt><dd><p>maximum value of any input of the form of image1 and image2</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.surface.images_3D">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">images_3D</code><span class="sig-paren">(</span><em class="sig-param">image1</em>, <em class="sig-param">image2</em>, <em class="sig-param">vector_of_euler_changes_3D=None</em>, <em class="sig-param">max_intensity1=255</em>, <em class="sig-param">max_intensity2=255</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.images_3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Euler characteristic surface of 3D images.</p>
+<p>This uses the vector of all possible Euler characteristic changes 
+produced by a voxel insertion in 3D images. This is must be passed
+as a parameter.</p>
+<dl class="simple">
+<dt>image1, image2</dt><dd><p>np.ndarray of integers</p>
+</dd>
+<dt>vector_of_euler_changes_3D</dt><dd><p>list of integers, precomputed Euler characteristic changes
+produced by a single voxel insertion</p>
+</dd>
+<dt>max_intensity1, max_intensity2</dt><dd><p>maximum value of any input of the form of image1 and image2</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">euchar</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Euler characteristic surface functions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="curve.html" title="previous chapter">Euler characteristic curves functions</a></li>
+      <li>Next: <a href="filtrations.html" title="next chapter">Filtrations</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Gabriele Beltramo.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/surface.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
