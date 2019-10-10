@@ -295,7 +295,7 @@ def bifiltration(simplices, parametrization1, parametrization2,
 
     dimensions_simplices = u.simplices_to_dimensions(simplices)
     euler_char_surf = cppsurface.bifiltration(dimensions_simplices,
-                                               parametrization1,
-                                               parametrization2,
-                                               bins1, bins2)
+                                              parametrization1,
+                                              parametrization2,
+                                              bins1, bins2)
     return np.array(euler_char_surf)

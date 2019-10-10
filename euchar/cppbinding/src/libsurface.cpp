@@ -6,6 +6,8 @@
 
 #include "libutils.hpp"
 
+#include <cstdio>
+
 namespace py = pybind11;
 using namespace std;
 
@@ -228,6 +230,10 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
     size_t num_rows = bins1.size();
     size_t num_cols = bins2.size();
 
+    // DEBUG
+    printf("num_rows: %zu\n", num_rows);
+    printf("num_cols: %zu\n", num_cols);
+    
     vector<vector<int>> euler_char_surface(num_rows, vector<int>(num_cols, 0));
 
     // we have 4 possible changes, from dim 0 to dim 3 maximum
@@ -235,6 +241,9 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
     
     size_t number_simplices = dim_simplices.size();
 
+    // DEBUG
+    printf("Number simplices %zu.\n", number_simplices);
+    
     // loop on simplices
     for (size_t i = 0; i < number_simplices; ++i) {
         size_t dim_simplex = dim_simplices[i];
@@ -250,8 +259,18 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
         lower2 = lower_bound(bins2.begin(), bins2.end(), par2);
         size_t index_simplex_in_bins2 = lower2 - bins2.begin();
 
+        // DEBUG
+        if (i > 500) {
+            printf("par1 %g.\n", par1);
+            printf("par2 %g.\n", par2);
+            printf("ind1 %zu.\n", index_simplex_in_bins1);
+            printf("ind2 %zu.\n", index_simplex_in_bins2);
+            printf("\tCHANGE --> %d\n", possible_changes[dim_simplex]);
+        }
+        
+        
         // update euler changes along rows
-        for (size_t incr = 0; incr < num_cols; ++incr) {
+        for (size_t incr = 0; incr < num_cols - index_simplex_in_bins2; ++incr) {
             euler_char_surface[index_simplex_in_bins1][index_simplex_in_bins2+incr] += possible_changes[dim_simplex];
         }
     }

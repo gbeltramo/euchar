@@ -111,6 +111,8 @@ def euler_surface_plot(bins1, bins2, euler_char_surf, n_levels=30,
     #ax.xaxis.set_major_formatter(ticker.FixedFormatter((name_list)))
     ax.set_title(title)
 
+    return fig, ax
+
 #=================================================
 
 def save(path="unnamed.png", dpi=200):
