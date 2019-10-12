@@ -5,32 +5,27 @@ from euchar.cppbinding.utils import vector_of_euler_changes_2d, vector_of_euler_
 
 #=================================================
 
-def estimate_density(points, n_neighbors, algorithm="ball_tree"):
+def estimate_inverse_density(points, n):
     """
-    Estimates density at each point in `points`.
+    Estimates the inverse of the density at each `p` in `points` as the
+    root mean square of the distances from `p` to its `n` nearest 
+    neighbors.
 
     Parameters
     ----------
     points
-        2d array of shape (N, d)
-    n_neighbors
-        number of closest points to consider when estimating the density
-    algorithm
-        string specifying which algorithm the NearestNeighbors class
-        from sklearn.neighbors should use
-
+        np.ndarray of shape (N, d)
+    n
+        int, number of nearest neighbors used to estimate the inverse of
+        the density.
+    
     Returns
     -------
     param_vertices
-        1d array parametrizing vertices by density. The order is the one of
-        indices of vertices (0, 1, 2, ...), so parametrized values are unsorted
+        1-D np.ndarray parametrizing vertices by inverse density.
 
-    Notes
-    -----
-    This requires scikit-learn to be installed in the current 
-    environment.
     """
-    nbrs = NearestNeighbors(n_neighbors+1, algorithm)
+    nbrs = NearestNeighbors(n+1, algorithm="ball_tree")
     dist = nbrs.fit(points).kneighbors(points)[0][:,1:]
 
     densities = np.empty(len(points))

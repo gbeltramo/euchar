@@ -171,101 +171,24 @@ def images_3D(image1, image2, vector_of_euler_changes_3D=None,
 
     return np.array(euler_char_surface)
 
-
-#=================================================
-
-def bifiltration_density(points, n_neighbors, bins1, bins2,
-                         param="alpha"):
-    """Compute Euler characteristic surface of bifiltration given by
-    combining a given parametrized filtration with the filtration
-    derived from a density estimate on points.
-    
-    Parameters
-    -----------
-    points
-        np.ndarray of shape (N, 2)
-    n_neighbors
-        int, number of nearest neighbors of a point `p` used to estimate 
-        the density at `p`.
-    bins1, bins2
-        iterable of sorted floats, these are used to bin the 
-        parametrization values of simplices in the Alpha filtration. 
-
-    Return
-    ------
-    euler_char_surface
-        np.ndarray of integers
-
-    """
-    try:
-        err_line1 = "`points` parameter needs to be an np.ndarray\n---"
-        assert str(type(points)) == "<class 'numpy.ndarray'>", err_line1
-    except AssertionError as err:
-        print("---\nError")
-        print(err)
-
-    dimension = points.shape[1]
-    param_vertices = u.estimate_density(points, n_neighbors)
-    
-    if dimension == 2:
-        if param == "alpha":
-            simplices, parametrization = f.alpha_filtration_2d(points)
-            euler_char_surf = cppsurface.bifiltration_2d(param_vertices,
-                                  parametrization, simplices,
-                                  len(bins1), len(bins2),
-                                  [min(bins1), max(bins1)],
-                                  [min(bins2), max(bins2)])
-        else:
-            print("Invalid `param` parameter. It can be: 'alpha'.")
-            return None
-    elif dimension == 3:
-        if param == "alpha":
-            simplices, parametrization = f.alpha_filtration_3d(points)
-            euler_char_surf = cppsurface.bifiltration_3d(param_vertices,
-                                  parametrization, simplices,
-                                  len(bins1), len(bins2),
-                                  [min(bins1), max(bins1)],
-                                  [min(bins2), max(bins2)])            
-        else:
-            print("Invalid `param` parameter. It can be: 'alpha'.")
-            return None
-    else:
-        print("Invalid number of dimensions. `points` must be")
-        print("two or three dimensional.")
-        return None
-
-
-
-    
-    
-    simplices, param = f.alpha_filtration_2d(points)
-    surf = cppsurface.bifiltration_2d(param_vertices,
-                                      param,
-                                      simplices,
-                                      len(bins1), len(bins2),
-                                      [min(bins1), max(bins1)],
-                                      [min(bins2), max(bins2)])
-    return np.array(surf)                
-
-
 #=================================================
 
 def bifiltration(simplices, parametrization1, parametrization2,
                  bins1, bins2):
-    """Compute Euler characteristic surface of bifiltration.
+    """
+    Compute Euler characteristic surface of a bifiltration.
     
     Parameters
     -----------
     simplices
         np.ndarray of shape (N, 3) or (N, 4). Each row is a simplex.
         For example [2 4 -1] is the edge (2,4) and [2 4 9] the 
-        triangle (2,4,9). Note that the indices of vertices are 
-        sorted.
+        triangle (2,4,9). 
     parametrization1, parametrization2
-        np.ndarray of sorted floats
+        np.ndarray of floats
     bins1, bins2
-        np.ndarray of sorted floats, these are used to bin the 
-        parametrization values of simplices in the Alpha filtration.
+        np.ndarrays of sorted floats, used to bin the parametrization
+        values of simplices 
     
     Return
     ------

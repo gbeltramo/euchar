@@ -22,8 +22,4 @@ vector<vector<int>> images_3d(py::array_t<int> input1, py::array_t<int> input2, 
 
 vector<vector<int>> bifiltration(vector<int>    dim_simplices, vector<double> parametrization1, vector<double> parametrization2, vector<double> bins1, vector<double> bins2);
 
-vector<vector<int>> bifiltration_2d(vector<double> unsorted_par_vertices, vector<double> sorted_par_simplices, vector<vector<int>> sorted_simplices, size_t nbins1, size_t nbins2, vector<double> minmax1, vector<double> minmax2);
-
-vector<vector<int>> bifiltration_3d(vector<double> unsorted_par_vertices, vector<double> sorted_par_simplices, vector<vector<int>> sorted_simplices, size_t nbins1, size_t nbins2, vector<double> minmax1, vector<double> minmax2);
-
 #endif

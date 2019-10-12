@@ -116,52 +116,38 @@ def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
 
 #=================================================
 
-def filtration(points, bins, param="alpha"):
-    """Compute the Euler characteristic curve of a finite point set.
+def filtration(simplices, parametrization, bins):
+    """
+    Compute the Euler characteristic curve of a filtration.
     
     Parameters
     ----------
-    points
-        np.ndarray of shape (N,2) or (N,3)
+    simplices
+        np.ndarray of shape (N, 3) or (N, 4). Each row is a simplex.
+        For example [2 4 -1] is the edge (2,4) and [2 4 9] the 
+        triangle (2,4,9). 
+    parametrization
+        np.ndarray of floats
     bins
-        iterable of sorted floats, used to bin the 
-        parametrization values of simplices in the Alpha filtration.
-    param
-        string, 'alpha' for Alpha filtration
-
+        np.ndarray of sorted floats, used to bin the parametrization
+        values of simplices 
+    
     Return
     ------
     euler_char_curve
         np.ndarray of integers
-    
+
     """
 
     try:
-        err_line1 = "`points` parameter needs to be an np.ndarray\n---"
-        assert str(type(points)) == "<class 'numpy.ndarray'>", err_line1
+        err_line1 = "`simplices` and `parametrization` must have same"
+        err_line2 = "length."
+        assert len(simplices) == len(parametrization), err_line1+err_line2
     except AssertionError as err:
         print("---\nError")
         print(err)
 
-    dimension = points.shape[1]
-
-    if dimension == 2:
-        if param == "alpha":
-            simplices, parametrization = f.alpha_filtration_2d(points)
-            euler_char_curve = cppcurve.filtration_2d(simplices, parametrization, bins)
-        else:
-            print("Invalid `param` parameter. It can be: 'alpha'.")
-            return None
-    elif dimension == 3:
-        if param == "alpha":
-            simplices, parametrization = f.alpha_filtration_3d(points)
-            euler_char_curve = cppcurve.filtration_3d(simplices, parametrization, bins)
-        else:
-            print("Invalid `param` parameter. It can be: 'alpha'.")
-            return None
-    else:
-        print("Invalid number of dimensions. `points` must be two or")
-        print("three dimensional.")
-        return None
-
+    dim_simplices = simplices_to_dimensions(simplices)
+    euler_char_curve = cppcurve.filtration(dim_simplices, parametrization, bins)
+        
     return  np.array(euler_char_curve)

@@ -1,6 +1,7 @@
 import numpy as np
 import euchar.utils as u 
-from scipy.spatial import Delaunay, distance
+from scipy.spatial import Delaunay
+from scipy.spatial.distance import euclidean
 
 #=================================================
 # Delaunay
@@ -95,124 +96,124 @@ def filter_simplices_on(vertices, simplices, parametrization):
 # Filtrations
 #=================================================
 
-def alpha_filtration_2d(points):
-    """Compute sorted simplices and sorted parametrization of 2D 
-point cloud.
+def alpha_filtration_2D(points):
+    """
+    Simplices and corresponding parametrization of 2D point cloud.
     
     Parameters
     ----------
     points
-        array of points in 2D
+        np.ndarray of shape (N, 2)
     
     Returns
     -------
-    sorted_simplices
+    simplices
         array of integers of shape (N,3) using -1 as placeholder
         Ex. [1,-1,-1] is vertex 1 and [3,5,-1] is edge (3,5).
-    sorted_parametrization
-        array of floats corresponding to the filtration parameter of
-        each simplex.
+    parametrization
+        array of floats corresponding to the Alpha filtration parameter
+        of each simplex.
+    
     """
 
-    # Make vertices
+    # Get vertices, and Delaunay simplices
     vertices = np.arange(len(points))
     edges, triangles = delaunay_ed_tri(points)
-    
-    # Pamatrise simplices by max(length(edge)) = Rips
-    par_vertices = np.zeros(len(points))
-    par_edges = np.array([distance.euclidean(*points[ed])
-                          for ed in edges])
-    par_triangles = np.array([u.parameter_triangle(*points[tri])
-                              for tri in triangles])
-    
-    # Unsorted simplices using arrays with same sizes.
+
+    # Make simplices, with -1 as a placeholder
     vertices = np.array([[v, -1, -1] for v in vertices])
     edges = np.array([[ed[0], ed[1], -1] for ed in edges])
-    unsorted_simplices = np.vstack([vertices, edges, triangles])
-    unsorted_param = np.hstack([par_edges, par_triangles])
+    simplices = np.vstack([vertices, edges, triangles])
+    
+    # Parametrization
+    par_vertices = np.zeros(len(points))
+    par_edges = np.array([euclidean(points[ed[0]],
+                                    points[ed[1]])
+                          for ed in edges])
+    par_triangles = np.array([u.parameter_triangle(points[tri[0]],
+                                                   points[tri[1]],
+                                                   points[tri[2]])
+                              for tri in triangles])
+    parametrization = np.hstack([par_vertices, par_edges,
+                                 par_triangles])
 
-    # Make sorted indices (knowing all parameters of vertices are 0)
-    sorted_indices_edges_triangles = np.argsort(unsorted_param)
-    sorted_indices_edges_triangles += len(points)
-    sorted_indices = np.hstack([np.arange(len(vertices)),
-                                sorted_indices_edges_triangles])
-
-    # Sort both simplices and their param with sorted_indices
-    sorted_simplices = unsorted_simplices[sorted_indices]
-    unsorted_param = np.hstack([np.zeros(len(vertices)),
-                                unsorted_param])
-    sorted_param = unsorted_param[sorted_indices]
-
-    # Fix order edges and triangles
-    sorted_simplices = fix_indices_param(sorted_indices,
-                                         sorted_param,
-                                         sorted_simplices)
-
-    return sorted_simplices, sorted_param
+    return simplices, parametrization
 
 #=================================================
 
-def alpha_filtration_3d(points):
+def alpha_filtration_3D(points):
     """
-    Return sorted parametrization and sorted simplices.
+    Simplices and corresponding parametrization of 3D point cloud.
     
     Parameters
     ----------
     points
-        array of points in 3D
+        np.ndarray of shape (N, 3)
     
     Returns
     -------
-    sorted_param
-        array of floats corresponding to the filtration parameter of
-        each simplex.
-    sorted_simplices
-        array of integers of shape (N,4) using -1 as placeholder
-        Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).
-    """
+    simplices
+        array of integers of shape (N, 4) using -1 as placeholder
+        Ex. [1,-1,-1,-1] is vertex 1 and [3,5,-1,-1] is edge (3,5).
+    parametrization
+        array of floats corresponding to the Alpha filtration parameter
+        of each simplex.
     
+    """
+    # Get vertices, and Delaunay simplices
     vertices = np.arange(len(points))
     edges, triangles, tetrahedra = delaunay_ed_tri_tetra(points)
 
-    # Pamatrise simplices by max(length(edge)) = Rips
-    par_vertices = np.zeros(len(points))
-    par_edges = np.array([distance.euclidean(*points[ed])
-                          for ed in edges])
-    par_triangles = np.array([u.parameter_triangle(*points[tri])
-                              for tri in triangles])
-    
-    par_tetrahedra = np.array([u.parameter_tetrahedron(*points[tetra])
-                           for tetra in tetrahedra])
-
-    # Unsorted simplices using arrays with same sizes. 
+    # Make simplices, with -1 as a placeholder
     vertices = np.array([[v, -1, -1, -1] for v in vertices])
     edges = np.array([[ed[0], ed[1], -1, -1] for ed in edges])
-    triangles = np.array([[tri[0], tri[1], tri[2], -1] for tri in triangles])
+    triangles = np.array([[tri[0], tri[1], tri[2], -1]
+                          for tri in triangles])
+    simplices = np.vstack([vertices, edges, triangles, tetrahedra])
     
-    unsorted_simplices = np.vstack([vertices, edges, triangles, tetrahedra])
-    unsorted_param = np.hstack([par_edges, par_triangles, par_tetrahedra])
+    # Parametrization
+    par_vertices = np.zeros(len(points))
+    par_edges = np.array([euclidean(points[ed[0]],
+                                    points[ed[1]])
+                          for ed in edges])
+    par_triangles = np.array([u.parameter_triangle(points[tri[0]],
+                                                   points[tri[1]],
+                                                   points[tri[2]])
+                              for tri in triangles])
+    par_tetrahedra = np.array([u.parameter_tetrahedron(*points[tetra])
+                               for tetra in tetrahedra])
+    parametrization = np.hstack([par_vertices, par_edges,
+                                 par_triangles, par_tetrahedra])
 
-    # Make sorted indices (knowing all parameters of vertices are 0)
-    sorted_indices_edges_triangles_tetrahedra = np.argsort(unsorted_param)
-    sorted_indices_edges_triangles_tetrahedra += len(points)
-    sorted_indices = np.hstack([np.arange(len(vertices)), sorted_indices_edges_triangles_tetrahedra])
-
-    # Sort both simplices and their parametrization with sorted_indices
-    sorted_simplices = unsorted_simplices[sorted_indices]
-    unsorted_param = np.hstack([np.zeros(len(vertices)), unsorted_param])
-    sorted_param = unsorted_param[sorted_indices]
-
-    # fix order edges and triangles
-    sorted_simplices = fix_indices_param(sorted_indices, sorted_param, sorted_simplices)
-
-    return sorted_simplices, sorted_param
+    return simplices, parametrization
 
 #=================================================
 
-def density_filtration(points, simplices, n_neighbors):
-    """Parametrization of simplices based on local density at vertices."""
+def inverse_density_filtration(points, simplices, n_neighbors):
+    """
+    Parametrization of simplices based on inverse of local density
+    at vertices. The inverse of the density at each `p` in `points`
+    is estimated as the root mean square of the distances from `p` to
+    its `n` nearest neighbors.
+    
+    Parameters
+    ----------
+    points
+       np.ndarray of shape (N, d)
+    simplices
+        np.ndarray of shape (M, d+1)
+    n_neighbors
+        int, number of nearest neighbors of a point `p` in `points`
+        used to estimate the local density around `p`.
+    
+    Return
+    ------
+    density_parametrization
+        1-D np.ndarray, parametrization of `simplices`. The value of a 
+        simplex is the maximum of any of its vertices.
+    """
 
-    density = u.estimate_density(points, n_neighbors)
+    density = u.estimate_inverse_density(points, n_neighbors)
 
     parametrization = []
     

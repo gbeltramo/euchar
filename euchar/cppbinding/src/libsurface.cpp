@@ -230,10 +230,6 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
     size_t num_rows = bins1.size();
     size_t num_cols = bins2.size();
 
-    // DEBUG
-    printf("num_rows: %zu\n", num_rows);
-    printf("num_cols: %zu\n", num_cols);
-    
     vector<vector<int>> euler_char_surface(num_rows, vector<int>(num_cols, 0));
 
     // we have 4 possible changes, from dim 0 to dim 3 maximum
@@ -241,14 +237,12 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
     
     size_t number_simplices = dim_simplices.size();
 
-    // DEBUG
-    printf("Number simplices %zu.\n", number_simplices);
     
     // loop on simplices
     for (size_t i = 0; i < number_simplices; ++i) {
         size_t dim_simplex = dim_simplices[i];
         double par1 = parametrization1[i];
-        double par2 = parametrization1[i];
+        double par2 = parametrization2[i];
         
         // find bins indexes
         vector<double>::iterator lower1;
@@ -258,16 +252,6 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
         vector<double>::iterator lower2;
         lower2 = lower_bound(bins2.begin(), bins2.end(), par2);
         size_t index_simplex_in_bins2 = lower2 - bins2.begin();
-
-        // DEBUG
-        if (i > 500) {
-            printf("par1 %g.\n", par1);
-            printf("par2 %g.\n", par2);
-            printf("ind1 %zu.\n", index_simplex_in_bins1);
-            printf("ind2 %zu.\n", index_simplex_in_bins2);
-            printf("\tCHANGE --> %d\n", possible_changes[dim_simplex]);
-        }
-        
         
         // update euler changes along rows
         for (size_t incr = 0; incr < num_cols - index_simplex_in_bins2; ++incr) {
@@ -285,199 +269,5 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
     }
 
     return euler_char_surface;
-}
-
-    
-//================================================
-
-vector<vector<int>> bifiltration_2d(vector<double> unsorted_par_vertices,
-                                    vector<double> sorted_par_simplices,
-                                    vector<vector<int>> sorted_simplices,
-                                    size_t nbins1, size_t nbins2,
-                                    vector<double> minmax1,
-                                    vector<double> minmax2)
-{
-    // sorted indices of vertices
-    vector<size_t> argvert(unsorted_par_vertices.size());
-    iota(argvert.begin(), argvert.end(), 0);
-
-    // map of vertices parametrization
-    map<size_t, double> map_par_vertices;
-    for (size_t k = 0; k < unsorted_par_vertices.size(); ++k)
-        map_par_vertices[k] = unsorted_par_vertices[k];
-
-    // sort indexes based on comparing values
-    // in unsorted_par_vertices
-    sort(argvert.begin(), argvert.end(),
-        [&unsorted_par_vertices](size_t i1, size_t i2)
-            {return unsorted_par_vertices[i1] < unsorted_par_vertices[i2];});
-
-    // make bins1-->(vertices) and bins2-->(simplices)
-
-    double step1((minmax1[1] - minmax1[0]) / nbins1);
-    double step2((minmax2[1] - minmax2[0]) / nbins2);
-
-    vector<double> bins1(nbins1+1);   // the last element of these
-    vector<double> bins2(nbins2+1);   // is different from np.linspace()
-
-    for (size_t row = 0; row < nbins1+1; row++)
-        bins1[row] = step1 * row + minmax1[0];
-
-    for (size_t col = 0; col < nbins2+1; col++)
-        bins2[col] = step2 * col + minmax2[0];
-
-    // map of simplices representing bi-filtration
-    map<size_t, vector<size_t>> map_simplices;
-    for (size_t index_simpl = 0; index_simpl < sorted_simplices.size(); index_simpl++) {
-        vector<int> simpl(sorted_simplices[index_simpl]);
-
-        double par_vertex_of_simpl(map_par_vertices[simpl[0]]);
-        for (const int &vertex: simpl) {
-            if (vertex == -1)
-                continue;  // if simp is "sorted" use break
-
-            if (map_par_vertices[vertex] > par_vertex_of_simpl)
-                par_vertex_of_simpl = map_par_vertices[vertex];
-        }
-
-        vector<double>::iterator lower1;
-        lower1 = lower_bound(bins1.begin(), bins1.end(), par_vertex_of_simpl);
-        size_t index_vertex_in_bins1(lower1 - bins1.begin());
-        map_simplices[index_vertex_in_bins1].push_back(index_simpl);
-    }
-
-    // loop on indices in bins1
-    // set the cumulative sum of changes equal to rows in surface
-    vector<int> changes(nbins2+1, 0);
-    vector<vector<int>> surface(nbins1, vector< int >(nbins2, 0));
-    vector<int> possible_changes{1, -1, 1};
-
-    for (size_t ind_bins1(0); ind_bins1 < bins1.size(); ind_bins1++)
-    {
-        vector<size_t> args_simplices_to_insert(map_simplices[ind_bins1]);
-
-        // loop to update changes
-        for (const size_t &arg: args_simplices_to_insert)
-        {
-            vector<int> inserted_simpl(sorted_simplices[arg]);
-            double inserted_par(sorted_par_simplices[arg]);
-
-            size_t dim(dim_simplex(inserted_simpl));
-
-            vector<double>::iterator lower2;
-            lower2 = lower_bound(bins2.begin(), bins2.end(), inserted_par);
-            changes[(lower2 - bins2.begin())] += possible_changes[dim];
-        }
-        // cumulative sum into surface
-        if (ind_bins1 != 0)
-        {
-            int c(changes[0]);
-            for (size_t index(0); index < nbins2; index++)
-            {
-                surface[ind_bins1-1][index] = c + changes[index+1];
-                c += changes[index+1];
-            }
-        }
-
-    }
-
-    return surface;
-}
-
-//================================================
-
-vector<vector<int>> bifiltration_3d(vector<double> unsorted_par_vertices,
-                                    vector<double> sorted_par_simplices,
-                                    vector<vector<int>> sorted_simplices,
-                                    size_t nbins1, size_t nbins2,
-                                    vector<double> minmax1,
-                                    vector<double> minmax2)
-{
-    // sorted indices of vertices
-    vector<size_t> argvert(unsorted_par_vertices.size());
-    iota(argvert.begin(), argvert.end(), 0);
-
-    // map of vertices parametrization
-    map< size_t, double > map_par_vertices;
-    for (size_t k(0); k < unsorted_par_vertices.size(); k++)
-        map_par_vertices[k] = unsorted_par_vertices[k];
-
-    // sort indexes based on comparing values in unsorted_par_vertices
-    sort(argvert.begin(), argvert.end(),
-        [&unsorted_par_vertices](size_t i1, size_t i2)
-            {return unsorted_par_vertices[i1] < unsorted_par_vertices[i2];});
-
-    // make bins1-->(vertices) and bins2-->(simplices)
-
-    double step1((minmax1[1] - minmax1[0]) / nbins1);
-    double step2((minmax2[1] - minmax2[0]) / nbins2);
-
-    vector<double> bins1(nbins1+1);   // the last element of these
-    vector<double> bins2(nbins2+1);   // is different from np.linspace()
-
-    for (size_t row(0); row < nbins1+1; row++)
-        bins1[row] = step1 * row + minmax1[0];
-
-    for (size_t col(0); col < nbins2+1; col++)
-        bins2[col] = step2 * col + minmax2[0];
-
-    // map of simplices representing bi-filtration
-    map<size_t, vector<size_t>> map_simplices;
-    for (size_t index_simpl(0); index_simpl < sorted_simplices.size(); index_simpl++)
-    {
-        vector<int> simpl(sorted_simplices[index_simpl]);
-
-        double par_vertex_of_simpl(map_par_vertices[simpl[0]]);
-        for (const int &vertex: simpl)
-        {
-            if (vertex == -1)
-                continue;  // if simp is "sorted" use break
-
-            if (map_par_vertices[vertex] > par_vertex_of_simpl)
-                par_vertex_of_simpl = map_par_vertices[vertex];
-        }
-
-        vector<double>::iterator lower1;
-        lower1 = lower_bound(bins1.begin(), bins1.end(), par_vertex_of_simpl);
-        size_t index_vertex_in_bins1(lower1 - bins1.begin());
-        map_simplices[index_vertex_in_bins1].push_back(index_simpl);
-    }
-
-    // loop on indices in bins1
-    // set the cumulative sum of changes equal to rows in surface
-    vector<int> changes(nbins2+1, 0);
-    vector<vector<int>> surface(nbins1, vector< int >(nbins2, 0));
-    vector<int> possible_changes{1, -1, 1, -1};
-
-    for (size_t ind_bins1(0); ind_bins1 < bins1.size(); ind_bins1++)
-    {
-        vector<size_t> args_simplices_to_insert(map_simplices[ind_bins1]);
-
-        // loop to update changes
-        for (const size_t &arg: args_simplices_to_insert)
-        {
-            vector<int> inserted_simpl(sorted_simplices[arg]);
-            double inserted_par(sorted_par_simplices[arg]);
-
-            size_t dim(dim_simplex(inserted_simpl));
-
-            vector<double>::iterator lower2;
-            lower2 = lower_bound(bins2.begin(), bins2.end(), inserted_par);
-            changes[(lower2 - bins2.begin())] += possible_changes[dim];
-        }
-        // cumulative sum into surface
-        if (ind_bins1 != 0)
-        {
-            int c(changes[0]);
-            for (size_t index(0); index < nbins2; index++)
-            {
-                surface[ind_bins1-1][index] = c + changes[index+1];
-                c += changes[index+1];
-            }
-        }
-
-    }
-
-    return surface;
 }
 

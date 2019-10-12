@@ -20,6 +20,6 @@ vector<int> naive_image_3d(vector<vector<vector<int>>> image, int M);
 
 vector<int> image_3d(py::array_t<int> input, const vector<int> &vector_euler_changes, int M);
 
-vector<int> filtration_2d(const vector<vector<int>> &simplices, const vector<double> &param, vector<double> &bins);
+vector<int> filtration(vector<int>    dim_simplices, vector<double> parametrization, vector<double> bins);
 
 #endif

@@ -17,11 +17,9 @@ PYBIND11_MODULE(surface, m) {
     m.def("images_3d", &images_3d);
     m.def("bifiltration", &bifiltration,
           "Euler char surface of 2 filtrations",
-          py::arg("simplices"), py::arg("parametrization1"),
-          py::arg("parametrization2"), py::arg("bins1"),
-          py::arg("bins2"));
-    m.def("bifiltration_2d", &bifiltration_2d);
-    m.def("bifiltration_3d", &bifiltration_3d);
+          py::arg("simplices"),
+          py::arg("parametrization1"), py::arg("parametrization2"),
+          py::arg("bins1"),py::arg("bins2"));
     
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

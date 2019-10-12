@@ -19,7 +19,7 @@ PYBIND11_MODULE(curve, m) {
           "Euler char curve of 3d image.");
     
     // filtrations functions
-    m.def("filtration_2d", &filtration_2d);
+    m.def("filtration", &filtration);
     
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;
