@@ -33,21 +33,23 @@
             
   <div class="section" id="welcome-to-euchar-s-documentation">
 <h1>Welcome to <strong>euchar</strong>’s documentation!<a class="headerlink" href="#welcome-to-euchar-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p><strong>NOTE: this project is work in progress!</strong></p>
 <p>This is the documentation of the <code class="docutils literal notranslate"><span class="pre">euchar</span></code> Python package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>This package requirements are</p>
+<p>For the package to install correctly the prerequisites are</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> version &gt;= 3.5</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> version &gt;= 2.2</p></li>
+</ul>
+<p>This module makes use of features provided by the following Python modules</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, used in the <code class="docutils literal notranslate"><span class="pre">display</span></code> module of the package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code>, used to obtain Delaunay triangulations of 2D and 3d finite point sets</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, for nearest neighbours alogrithm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points</p></li>
 </ul>
-<p>The package can be installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code> with</p>
+<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> can be installed with the following command</p>
 <p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">euchar</span></code></p>
 </div>
 <div class="section" id="examples">

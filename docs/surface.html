@@ -37,44 +37,19 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-euchar.surface"></span><p>Implementation of the Euler characateristic surfaces algorithms.</p>
-<p>Author: Gabriele Beltramo</p>
-<dl class="function">
+<span class="target" id="module-euchar.surface"></span><dl class="function">
 <dt id="euchar.surface.bifiltration">
 <code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">bifiltration</code><span class="sig-paren">(</span><em class="sig-param">simplices</em>, <em class="sig-param">parametrization1</em>, <em class="sig-param">parametrization2</em>, <em class="sig-param">bins1</em>, <em class="sig-param">bins2</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.bifiltration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Euler characteristic surface of bifiltration.</p>
 <dl class="simple">
 <dt>simplices</dt><dd><p>np.ndarray of shape (N, 3) or (N, 4). Each row is a simplex.
 For example [2 4 -1] is the edge (2,4) and [2 4 9] the 
-triangle (2,4,9). Note that the indices of vertices are 
-sorted.</p>
+triangle (2,4,9).</p>
 </dd>
-<dt>parametrization1, parametrization2</dt><dd><p>np.ndarray of sorted floats</p>
+<dt>parametrization1, parametrization2</dt><dd><p>np.ndarray of floats</p>
 </dd>
-<dt>bins1, bins2</dt><dd><p>np.ndarray of sorted floats, these are used to bin the 
-parametrization values of simplices in the Alpha filtration.</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>euler_char_surface</dt><dd><p>np.ndarray of integers</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="euchar.surface.bifiltration_density">
-<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">bifiltration_density</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">n_neighbors</em>, <em class="sig-param">bins1</em>, <em class="sig-param">bins2</em>, <em class="sig-param">param='alpha'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.bifiltration_density" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute Euler characteristic surface of bifiltration given by
-combining a given parametrized filtration with the filtration
-derived from a density estimate on points.</p>
-<dl class="simple">
-<dt>points</dt><dd><p>np.ndarray of shape (N, 2)</p>
-</dd>
-<dt>n_neighbors</dt><dd><p>int, number of nearest neighbors of a point <cite>p</cite> used to estimate 
-the density at <cite>p</cite>.</p>
-</dd>
-<dt>bins1, bins2</dt><dd><p>iterable of sorted floats, these are used to bin the 
-parametrization values of simplices in the Alpha filtration.</p>
+<dt>bins1, bins2</dt><dd><p>np.ndarrays of sorted floats, used to bin the parametrization
+values of simplices</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -84,24 +59,22 @@ parametrization values of simplices in the Alpha filtration.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="euchar.surface.image_with_function">
-<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">image_with_function</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">iterations</em>, <em class="sig-param">func</em>, <em class="sig-param">max_intensity=255</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.image_with_function" title="Permalink to this definition">¶</a></dt>
+<dt id="euchar.surface.image_2D_and_function">
+<code class="sig-prename descclassname">euchar.surface.</code><code class="sig-name descname">image_2D_and_function</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">func</em>, <em class="sig-param">max_intensity=255</em>, <em class="sig-param">iterations=1</em>, <em class="sig-param">kwargs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.surface.image_2D_and_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Euler characteristic surface of a give image with the
-bi-filtration given by pixel value and iterative application of
-a given function.</p>
+bi-filtration given by sublevel sets of pixel values and 
+iterative application of a given function on these sublevel sets.</p>
 <dl class="simple">
 <dt>image</dt><dd><p>np.ndarray of integers</p>
 </dd>
 <dt>iterations</dt><dd><p>number of times the function is applied to the image.</p>
 </dd>
-<dt>func</dt><dd><p>function taking an image at returning an image of the
-same size. The default is cv2.GaussianBlur, so you
-need to pass something like <cite>**{‘ksize’:(3,3), ‘sigmaX’:1.0}</cite>
-if you do not set this to something else.</p>
+<dt>func</dt><dd><p>function taking a sublevel set of <cite>image</cite> and returning 
+a binary image of the same size.</p>
 </dd>
-<dt>max_intensity</dt><dd><p>int, maximum pixel value.</p>
+<dt>max_intensity</dt><dd><p>maximum value of elements in image</p>
 </dd>
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs</dt><dd><p>possible arguments of function <cite>func</cite> passed as a parameter.</p>
+<dt>kwargs</dt><dd><p>possible arguments of function <cite>func</cite> passed as a parameter.</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -146,7 +119,7 @@ as a parameter.</p>
 <dt>vector_of_euler_changes_3D</dt><dd><p>list of integers, precomputed Euler characteristic changes
 produced by a single voxel insertion</p>
 </dd>
-<dt>max_intensity1, max_intensity2</dt><dd><p>maximum value of any input of the form of image1 and image2</p>
+<dt>max_intensity1, max_intensity2</dt><dd><p>maximum values of elements in image1 and image2</p>
 </dd>
 </dl>
 <dl class="simple">

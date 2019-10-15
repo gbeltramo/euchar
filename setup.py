@@ -73,13 +73,13 @@ surface = CMakeExtension(name="surface",
                          sourcedir="euchar/cppbinding/")
 setup(
     name='euchar',
-    version='0.1',
+    version='0.1.1',
     packages=find_packages("."),
     author="Gabriele Beltramo",
     author_email="gabri.beltramo@gmail.com",
-    description="Euler characteristic on images and finite point sets.",
+    description="Euler characteristic of images and finite point sets.",
     long_description=long_description,
-    long_description_content_type="text/markwdown",
+    long_description_content_type="text/markdown",
     url="https://github.com/gbeltramo/euchar",
     license='MIT',
     install_requires=[

@@ -36,7 +36,10 @@ def estimate_inverse_density(points, n):
 #=================================================
 
 def vector_all_euler_changes_in_2D_images():
-    """Returns a vector of 256 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3 binary neighbourhood.
+    """
+    Returns a vector of 256 integers, containing all the possible Euler
+    characteristic changes produced by the insertion of a central pixel
+    in a 3x3 binary neighbourhood.
     """
     
     list_2d_changes = vector_of_euler_changes_2d()
@@ -45,7 +48,10 @@ def vector_all_euler_changes_in_2D_images():
 #=================================================
 
 def vector_all_euler_changes_in_3D_images():
-    """Returns a vector of 67,108,864 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3x3 binary neighbourhood.
+    """
+    Returns a vector of 67,108,864 integers, containing all the
+    possible Euler characteristic changes produced by the insertion of
+    a central pixel in a 3x3x3 binary neighbourhood.
     
     Notes
     -----
@@ -75,7 +81,8 @@ def magnitude(v):
 #=================================================
 
 def circumradius_triangle(A, B, C):
-    """Compute circumradius of 3 points in 2 or 3 dimensions.
+    """
+    Compute circumradius of 3 points in 2 or 3 dimensions.
     
     Parameters
     ----------
@@ -96,7 +103,8 @@ def circumradius_triangle(A, B, C):
 #=================================================
 
 def circumcenter_triangle(A, B, C):
-    """Compute circumcenter of 3 points in 2 or 3 dimensions.
+    """
+    Compute circumcenter of 3 points in 2 or 3 dimensions.
 
     Parameters
     ----------
@@ -330,7 +338,7 @@ def center_tetrahedron(A, B, C, D):
     circum = circumcenter_tetra(A, B, C, D)
 
     if circumcenter_is_inside(circum, A, B, C, D):
-         return circum
+        return circum
     else:
         C1 = center_triangle(A, B, C)
         C2 = center_triangle(A, B, D)
@@ -351,7 +359,24 @@ def center_tetrahedron(A, B, C, D):
 #=================================================
 
 def simplices_to_dimensions(simplices):
+    """
+    Transforms an array of simplices to an array of their dimensions.
 
+    Example
+    -------
+    Given the array of simplices
+    
+    ```
+    [[1 -1 -1], [3 4 -1], [10 12 15]]
+    ```
+
+    the output will be 
+
+    ```
+    [0 1 2]
+    ```
+
+    """
     def dim_simplex(sim):
         cnt = 0
         for el in sim:

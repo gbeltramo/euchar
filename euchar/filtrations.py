@@ -4,12 +4,11 @@ from scipy.spatial import Delaunay
 from scipy.spatial.distance import euclidean
 
 #=================================================
-# Delaunay
-#=================================================
 
 def delaunay_ed_tri(points):
+    """Delaunay triangulation simplices of two dimensional points."""
     if points.shape[1] != 2:
-        raise ValueError("points have invalid number of dimensions")
+        raise ValueError("Points need to be a two dimensional np.ndarray.")
 
     tri = Delaunay(points)
     arr_triangles = np.array([np.sort(unsort_tri)
@@ -29,8 +28,9 @@ def delaunay_ed_tri(points):
 #=================================================
 
 def delaunay_ed_tri_tetra(points):
+    """Delauanay triangulation simplices of three dimensional points."""
     if points.shape[1] !=3:
-        raise ValueError("points have invalid number of dimensions")
+        raise ValueError("Points need to be a three dimensional np.ndarray.")
     tetra = Delaunay(points)
     arr_tetrahedra = np.array([np.sort(unsort_tetra)
                                for unsort_tetra in tetra.simplices])
@@ -49,51 +49,6 @@ def delaunay_ed_tri_tetra(points):
     return (np.array(list(edges)), np.array(list(triangles)),
                     arr_tetrahedra)
 
-#=================================================
-
-def dimension(simplex):
-    return len(simplex) - np.sum(simplex == -1) - 1
-
-#=================================================
-
-def fix_indices_param(indices, param, simplices):
-    for i in range(1, len(indices)):
-        p0 = param[i-1]
-        p1 = param[i]
-        
-        if p0 == p1:
-            # only need to switch two consecutive simplices
-            # alpha par alows only one edge of same parameter
-            # as a triangle
-            dim_p0 = dimension(simplices[i-1])
-            dim_p1 = dimension(simplices[i])
-            if dim_p0 > dim_p1:
-                higher_dim_simpl = np.copy(simplices[i-1])
-                simplices[i-1] = np.copy(simplices[i])
-                simplices[i] = higher_dim_simpl
-    return simplices
-
-#=================================================
-
-def filter_simplices_on(vertices, simplices, parametrization):
-
-    new_sim = []
-    new_par = []
-
-    for k, simpl in enumerate(simplices):
-        nope = False
-        dim = len(np.flatnonzero(simpl + 1))
-        for i in range(dim):
-            if simpl[i] not in vertices:
-                nope = True
-        if nope == False:
-            new_sim.append(list(simpl))
-            new_par.append(parametrization[k])
-
-    return np.array(new_sim), np.array(new_par)
-
-#=================================================
-# Filtrations
 #=================================================
 
 def alpha_filtration_2D(points):

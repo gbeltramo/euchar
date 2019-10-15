@@ -38,15 +38,30 @@
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-euchar.utils"></span><dl class="function">
+<dt id="euchar.utils.center_tetrahedron">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">center_tetrahedron</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.center_tetrahedron" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.center_triangle">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">center_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.center_triangle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.circumcenter_is_inside">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_is_inside</code><span class="sig-paren">(</span><em class="sig-param">circum</em>, <em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_is_inside" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="euchar.utils.circumcenter_tetra">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_tetra" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_tetra</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_tetra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute circumcenter of 4 points in 3 dimensions.</p>
 <dl class="simple">
-<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+<dt>A, B, C, D</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>circumcenter</dt><dd><p>np.array, the circumcentre of the four points</p>
+<dt>circumcenter</dt><dd><p>np.array, the circumcenter of the four points</p>
 </dd>
 </dl>
 </dd></dl>
@@ -54,23 +69,23 @@
 <dl class="function">
 <dt id="euchar.utils.circumcenter_triangle">
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumcenter_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumcenter_triangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute circumcentre of 3 points in 2 or 3 dimensions.</p>
+<dd><p>Compute circumcenter of 3 points in 2 or 3 dimensions.</p>
 <dl class="simple">
 <dt>A, B, C</dt><dd><p>np.arrays of length equal to the Euclidean dimension.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>circumcentre</dt><dd><p>np.array, the circumcentre of the three points</p>
+<dt>circumcenter</dt><dd><p>np.array, the circumcenter of the three points</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="euchar.utils.circumradius_tetra">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumradius_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumradius_tetra" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">circumradius_tetra</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.circumradius_tetra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute circumradius of 4 points in 3 dimensions.</p>
 <dl class="simple">
-<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+<dt>A, B, C, D</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -94,26 +109,34 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="euchar.utils.estimate_density">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">estimate_density</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">n_neighbors</em>, <em class="sig-param">algorithm='ball_tree'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.estimate_density" title="Permalink to this definition">¶</a></dt>
-<dd><p>Estimates density at each point in <cite>points</cite>.</p>
+<dt id="euchar.utils.estimate_inverse_density">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">estimate_inverse_density</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">n</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.estimate_inverse_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the inverse of the density at each <cite>p</cite> in <cite>points</cite> as the
+root mean square of the distances from <cite>p</cite> to its <cite>n</cite> nearest 
+neighbors.</p>
 <dl class="simple">
-<dt>points</dt><dd><p>2d array of shape (N, d)</p>
+<dt>points</dt><dd><p>np.ndarray of shape (N, d)</p>
 </dd>
-<dt>n_neighbors</dt><dd><p>number of closest points to consider when estimating the density</p>
-</dd>
-<dt>algorithm</dt><dd><p>string specifying which algorithm the NearestNeighbors class
-from sklearn.neighbors should use</p>
+<dt>n</dt><dd><p>int, number of nearest neighbors used to estimate the inverse of
+the density.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>param_vertices</dt><dd><p>1d array parametrizing vertices by density. The order is the one of
-indices of vertices (0, 1, 2, …), so parametrized values are unsorted</p>
+<dt>param_vertices</dt><dd><p>1-D np.ndarray parametrizing vertices by inverse density.</p>
 </dd>
 </dl>
-<p>This requires scikit-learn to be installed in the current 
-environment.</p>
 </dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.is_acute">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">is_acute</code><span class="sig-paren">(</span><em class="sig-param">lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.is_acute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a triangle is acute with Pythgoras theorem.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.utils.is_on_correct_side">
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">is_on_correct_side</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">test_point</em>, <em class="sig-param">point</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.is_on_correct_side" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="euchar.utils.magnitude">
@@ -123,17 +146,15 @@ environment.</p>
 
 <dl class="function">
 <dt id="euchar.utils.parameter_tetrahedron">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">parameter_tetrahedron</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.parameter_tetrahedron" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the Alpha filtration parameter of a tetrahedron of vertices p1, p2, p3, p4.</p>
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">parameter_tetrahedron</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.parameter_tetrahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Alpha filtration parameter of a tetrahedron of vertices
+A, B, C, D.</p>
 <dl class="simple">
-<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron.</p>
+<dt>A, B, C, D</dt><dd><p>np.arrays, the four vertices of the tetrahedron.</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>parameter</dt><dd><p>float, Alpha filtration parameter of the tetrahedron. This
-is the greatest value among twice the circumradius of the 
-tetrahedron and twice the circumradiuses of the four 
-triangles forming the faces of the tetrahedron.</p>
+<dt>parameter</dt><dd><p>float, Alpha filtration parameter of the tetrahedron.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -141,17 +162,17 @@ triangles forming the faces of the tetrahedron.</p>
 <dl class="function">
 <dt id="euchar.utils.parameter_triangle">
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">parameter_triangle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.parameter_triangle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the Alpha filtration parameter of a triangle of vertices A, B, C.</p>
+<dd><p>Compute the Alpha filtration parameter of a triangle of vertices 
+A, B, C.</p>
 <dl class="simple">
 <dt>A, B, C</dt><dd><p>np.arrays, the three vertices of the triangle</p>
 </dd>
 </dl>
 <dl class="simple">
 <dt>parameter</dt><dd><p>float, Alpha filtration parameter of the triangle. This
-is twice the circumradius of the triangle if this is
-greater than of all the three triangle edges lengths, or
-it is the greatest value among the length of edges of the
-triangle.</p>
+is twice the circumradius of the triangle if the triangle is
+acute, or it is the greatest value among the length of edges 
+of the triangle.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -159,18 +180,31 @@ triangle.</p>
 <dl class="function">
 <dt id="euchar.utils.simplices_to_dimensions">
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">simplices_to_dimensions</code><span class="sig-paren">(</span><em class="sig-param">simplices</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.simplices_to_dimensions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Transforms an array of simplices to an array of their dimensions.</p>
+<p>Given the array of simplices</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">[[1</span> <span class="pre">-1</span> <span class="pre">-1],</span> <span class="pre">[3</span> <span class="pre">4</span> <span class="pre">-1],</span> <span class="pre">[10</span> <span class="pre">12</span> <span class="pre">15]]</span>
+<span class="pre">`</span></code></p>
+<p>the output will be</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">[0</span> <span class="pre">1</span> <span class="pre">2]</span>
+<span class="pre">`</span></code></p>
+</dd></dl>
 
 <dl class="function">
 <dt id="euchar.utils.vector_all_euler_changes_in_2D_images">
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_2D_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_2D_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a vector of 256 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3 binary neighbourhood.</p>
+<dd><p>Returns a vector of 256 integers, containing all the possible Euler
+characteristic changes produced by the insertion of a central pixel
+in a 3x3 binary neighbourhood.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="euchar.utils.vector_all_euler_changes_in_3D_images">
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_3D_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_3D_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a vector of 67,108,864 integers, containing all the possible Euler characteristic changes produced by the insertion of a central pixel in a 3x3x3 binary neighbourhood.</p>
+<dd><p>Returns a vector of 67,108,864 integers, containing all the
+possible Euler characteristic changes produced by the insertion of
+a central pixel in a 3x3x3 binary neighbourhood.</p>
 <p>It is recommended to produce this vector once and to write it 
 to a file. For example with numpy</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector_changes</span> <span class="o">=</span> <span class="n">vector_all_euler_changes_in_3d_images</span><span class="p">()</span>
@@ -185,10 +219,11 @@ to a file. For example with numpy</p>
 
 <dl class="function">
 <dt id="euchar.utils.vol_tetra">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vol_tetra</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em>, <em class="sig-param">p3</em>, <em class="sig-param">p4</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vol_tetra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Volume of the tetrahedron whose four vertices are the given four points p1, p2, p3, p4.</p>
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vol_tetra</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vol_tetra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Volume of the tetrahedron whose four vertices are the given four 
+points A, B, C, D.</p>
 <dl class="simple">
-<dt>p1, p2, p3, p4</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
+<dt>A, B, C, D</dt><dd><p>np.arrays, the four vertices of the tetrahedron</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -227,7 +262,9 @@ to a file. For example with numpy</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
 </ul>
 
 <div class="relations">

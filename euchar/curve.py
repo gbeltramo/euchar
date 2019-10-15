@@ -1,12 +1,3 @@
-"""
-
-
-    Implementation of the Euler characateristic curves algorithms.
-
-    Author: Gabriele Beltramo
-
-"""
-
 import numpy as np
 import euchar.utils as u
 import euchar.filtrations as f
@@ -16,7 +7,8 @@ import euchar.cppbinding.curve as cppcurve
 
 def image_2D(image, vector_of_euler_changes_2D=None,
              max_intensity=255):
-    """Euler characteristic curve of 2D image.
+    """
+    Euler characteristic curve of 2D image.
     
     This uses the vector of all possible Euler characteristic changes 
     produced by a pixel insertion in 2D images. This is recomputed 
@@ -31,7 +23,7 @@ def image_2D(image, vector_of_euler_changes_2D=None,
         list of integers, precomputed Euler characteristic changes
         produced by a single pixel insertion
     max_intensity
-        maximum value of any input of the form of image
+        maximum value of elements in image
     
     Return
     ------
@@ -65,7 +57,8 @@ def image_2D(image, vector_of_euler_changes_2D=None,
 #=================================================
 
 def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
-    """Euler characteristic curve of 3D image.
+    """
+    Euler characteristic curve of 3D image.
     
     This uses the vector of all possible Euler characteristic changes 
     produced by a voxel insertion in 3D images. This is must be passed
@@ -79,7 +72,7 @@ def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
         list of integers, precomputed Euler characteristic changes
         produced by a single voxel insertion
     max_intensity
-        maximum value of any input of the form of image
+        maximum value of elements in image
     
     Return
     ------
@@ -94,6 +87,7 @@ def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
     except AssertionError as err:
         print("---\nError")
         print(err)
+        return None
 
     try:
         err_line1 = "`image` must be a three dimensional np.ndarray\n---"
@@ -101,11 +95,16 @@ def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
     except AssertionError as err:
         print("---\nError")
         print(err)
-        
-    if vector_of_euler_changes_3D is None:
-        print("You must pass in the vector of all possible Euler")
-        print("characteristic changes for 3D images, which can be")
-        print("computed with euchar.utils.vector_all_euler_changes_in_3D_images.")
+        return None
+
+    try:
+        err_line1 = "You must pass in the vector of all possible Euler"
+        err_line2 = "characteristic changes for 3D images, which can be"
+        err_line3 = "computed with euchar.utils.vector_all_euler_changes_in_3D_images.\n---"
+        assert vector_of_euler_changes_3D is not None, err_line1 + err_line2 + err_line3
+    except AssertionError as err:
+        print("---\nError")
+        print(err)
         return None
 
     euler_char_curve = cppcurve.image_3d(image,
@@ -146,8 +145,9 @@ def filtration(simplices, parametrization, bins):
     except AssertionError as err:
         print("---\nError")
         print(err)
+        return None
 
-    dim_simplices = simplices_to_dimensions(simplices)
+    dim_simplices = u.simplices_to_dimensions(simplices) 
     euler_char_curve = cppcurve.filtration(dim_simplices, parametrization, bins)
         
     return  np.array(euler_char_curve)

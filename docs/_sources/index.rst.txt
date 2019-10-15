@@ -6,8 +6,6 @@
 Welcome to **euchar**'s documentation!
 ============================================
 
-**NOTE: this project is work in progress!**
-
 This is the documentation of the ``euchar`` Python package.
 
 ``euchar`` provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.
@@ -15,16 +13,19 @@ This is the documentation of the ``euchar`` Python package.
 Installation
 --------------
 
-This package requirements are
+For the package to install correctly the prerequisites are
 
 - ``CMake`` version >= 3.5
 - ``pybind11`` version >= 2.2
+
+This module makes use of features provided by the following Python modules
+
 - ``numpy``
 - ``matplotlib``, used in the ``display`` module of the package
 - ``scipy``, used to obtain Delaunay triangulations of 2D and 3d finite point sets
-- ``scikit-learn``, for nearest neighbours alogrithm
+- ``scikit-learn``, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
 
-The package can be installed via ``pip`` with
+``euchar`` can be installed with the following command
 
 ``$ pip install euchar``
 

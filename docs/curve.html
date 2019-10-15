@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Filtrations" href="filtrations.html" />
+    <link rel="next" title="Euler characteristic surface functions" href="surface.html" />
     <link rel="prev" title="Utility functions" href="utils.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -37,19 +37,19 @@
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-euchar.curve"></span><p>Implementation of the Euler characateristic curves algorithms.</p>
-<p>Author: Gabriele Beltramo</p>
-<dl class="function">
+<span class="target" id="module-euchar.curve"></span><dl class="function">
 <dt id="euchar.curve.filtration">
-<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">filtration</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">bins</em>, <em class="sig-param">param='alpha'</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.filtration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the Euler characteristic curve of a finite point set.</p>
+<code class="sig-prename descclassname">euchar.curve.</code><code class="sig-name descname">filtration</code><span class="sig-paren">(</span><em class="sig-param">simplices</em>, <em class="sig-param">parametrization</em>, <em class="sig-param">bins</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.curve.filtration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Euler characteristic curve of a filtration.</p>
 <dl class="simple">
-<dt>points</dt><dd><p>np.ndarray of shape (N,2) or (N,3)</p>
+<dt>simplices</dt><dd><p>np.ndarray of shape (N, 3) or (N, 4). Each row is a simplex.
+For example [2 4 -1] is the edge (2,4) and [2 4 9] the 
+triangle (2,4,9).</p>
 </dd>
-<dt>bins</dt><dd><p>iterable of sorted floats, used to bin the 
-parametrization values of simplices in the Alpha filtration.</p>
+<dt>parametrization</dt><dd><p>np.ndarray of floats</p>
 </dd>
-<dt>param</dt><dd><p>string, ‘alpha’ for Alpha filtration</p>
+<dt>bins</dt><dd><p>np.ndarray of sorted floats, used to bin the parametrization
+values of simplices</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -72,7 +72,7 @@ parameter.</p>
 <dt>vector_of_euler_changes_2D</dt><dd><p>list of integers, precomputed Euler characteristic changes
 produced by a single pixel insertion</p>
 </dd>
-<dt>max_intensity</dt><dd><p>maximum value of any input of the form of image</p>
+<dt>max_intensity</dt><dd><p>maximum value of elements in image</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -94,7 +94,7 @@ as a parameter.</p>
 <dt>vector_of_euler_changes_3D</dt><dd><p>list of integers, precomputed Euler characteristic changes
 produced by a single voxel insertion</p>
 </dd>
-<dt>max_intensity</dt><dd><p>maximum value of any input of the form of image</p>
+<dt>max_intensity</dt><dd><p>maximum value of elements in image</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -133,7 +133,9 @@ produced by a single voxel insertion</p>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Euler characteristic curves functions</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
 </ul>
 
 <div class="relations">
@@ -141,7 +143,7 @@ produced by a single voxel insertion</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="utils.html" title="previous chapter">Utility functions</a></li>
-      <li>Next: <a href="filtrations.html" title="next chapter">Filtrations</a></li>
+      <li>Next: <a href="surface.html" title="next chapter">Euler characteristic surface functions</a></li>
   </ul></li>
 </ul>
 </div>

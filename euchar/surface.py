@@ -1,12 +1,3 @@
-"""
-
-
-    Implementation of the Euler characateristic surfaces algorithms.
-
-    Author: Gabriele Beltramo
-
-"""
-
 import numpy as np
 import euchar.utils as u
 import euchar.filtrations as f
@@ -17,7 +8,8 @@ import euchar.cppbinding.surface as cppsurface
 
 def images_2D(image1, image2, vector_of_euler_changes_2D=None,
               max_intensity1=255, max_intensity2=255):
-    """Euler characteristic curve of a pair of 2D images.
+    """
+    Euler characteristic curve of a pair of 2D images.
     
     This uses the vector of all possible Euler characteristic changes 
     produced by a pixel insertion in 2D images. This is recomputed 
@@ -48,6 +40,7 @@ def images_2D(image1, image2, vector_of_euler_changes_2D=None,
     except AssertionError as err:
         print("---\nError")
         print(err)
+        return None
 
     try:
         err_line1 = "`image` must be a two dimensional np.array\n---"
@@ -56,6 +49,7 @@ def images_2D(image1, image2, vector_of_euler_changes_2D=None,
     except AssertionError as err:
         print("---\nError")
         print(err)
+        return None
 
     if vector_of_euler_changes_2D is None:
         vector_of_euler_changes_2D = u.vector_all_euler_changes_in_2D_images()
@@ -69,12 +63,13 @@ def images_2D(image1, image2, vector_of_euler_changes_2D=None,
 
 #=================================================
 
-def image_with_function(image, iterations, func, max_intensity=255,
-                        **kwargs):
-    """Compute the Euler characteristic surface of a give image with the
-    bi-filtration given by pixel value and iterative application of
-    a given function.
-
+def image_2D_and_function(image, func, max_intensity=255,
+                          iterations=1, kwargs=None):
+    """
+    Compute the Euler characteristic surface of a give image with the
+    bi-filtration given by sublevel sets of pixel values and 
+    iterative application of a given function on these sublevel sets.
+    
     Parameters
     ----------
     image
@@ -82,38 +77,36 @@ def image_with_function(image, iterations, func, max_intensity=255,
     iterations
         number of times the function is applied to the image.
     func
-        function taking an image at returning an image of the
-        same size. The default is cv2.GaussianBlur, so you
-        need to pass something like `**{'ksize':(3,3), 'sigmaX':1.0}`
-        if you do not set this to something else.
+        function taking a sublevel set of `image` and returning 
+        a binary image of the same size. 
     max_intensity
-        int, maximum pixel value.
-    **kwargs
+        maximum value of elements in image
+    kwargs
         possible arguments of function `func` passed as a parameter.
 
     Returns
     -------
     euler_char_surface
         np.ndarray of integers
-
+    
     """
     
-    surface = np.empty((max_intensity+1, iterations+1), dtype=int)
+    surface = np.zeros(shape=(iterations+1, max_intensity+1), dtype=int)
 
-    # Copy `image` into `new_image` to avoid aliasing
-    new_image = np.copy(image)
-
-    for j in range(iterations+1):
-        # We use iterations+1 so to have also the
-        # original `image` euler curve
-        vector = u.vector_all_euler_changes_in_2D_images()
-        ecc = c.image_2d(new_image, vector, max_intensity)
-        surface[:,j] = np.array(ecc)
-
-        new_image = func(image, **kwargs)
-
+    surface[0] = c.image_2D(image, max_intensity=max_intensity)
+    
+    if kwargs is None:
+        kwargs = dict()
+        
+    for i in range(1, iterations+1):
+        for j in range(max_intensity+1):
+            thresh = (image <= j).astype(np.uint8)
+            for _ in range(i):
+                thresh = func(thresh, **kwargs)
+            euler_char = char_binary_image_2d(thresh.astype(bool))
+            surface[i][j] = euler_char
+            
     return surface
-
 
 #=================================================
 
@@ -133,7 +126,7 @@ def images_3D(image1, image2, vector_of_euler_changes_3D=None,
         list of integers, precomputed Euler characteristic changes
         produced by a single voxel insertion
     max_intensity1, max_intensity2
-        maximum value of any input of the form of image1 and image2
+        maximum values of elements in image1 and image2
     
     Return
     ------
@@ -149,6 +142,7 @@ def images_3D(image1, image2, vector_of_euler_changes_3D=None,
     except AssertionError as err:
         print("---\nError")
         print(err)
+        return None
 
     try:
         err_line1 = "`image` must be a three dimensional np.array\n---"
@@ -157,11 +151,16 @@ def images_3D(image1, image2, vector_of_euler_changes_3D=None,
     except AssertionError as err:
         print("---\nError")
         print(err)
-        
-    if vector_of_euler_changes_3D is None:
-        print("You must pass in the vector of all possible Euler")
-        print("characteristic changes for 3D images, which can be")
-        print("computed with euchar.utils.vector_all_euler_changes_in_3D_images.")
+        return None
+
+    try:
+        err_line1 = "You must pass in the vector of all possible Euler"
+        err_line2 = "characteristic changes for 3D images, which can be"
+        err_line3 = "computed with euchar.utils.vector_all_euler_changes_in_3D_images.\n---"
+        assert vector_of_euler_changes_3D is not None, err_line1 + err_line2 + err_line3
+    except AssertionError as err:
+        print("---\nError")
+        print(err)
         return None
 
     euler_char_surface = cppsurface.images_3d(image1, image2,
@@ -176,7 +175,7 @@ def images_3D(image1, image2, vector_of_euler_changes_3D=None,
 def bifiltration(simplices, parametrization1, parametrization2,
                  bins1, bins2):
     """
-    Compute Euler characteristic surface of a bifiltration.
+    Compute Euler characteristic surface of bifiltration.
     
     Parameters
     -----------

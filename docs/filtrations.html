@@ -14,7 +14,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Euler characteristic curves functions" href="curve.html" />
+    <link rel="next" title="Euler characteristic plotting" href="display.html" />
+    <link rel="prev" title="Euler characteristic surface functions" href="surface.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -37,40 +38,37 @@
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-euchar.filtrations"></span><dl class="function">
-<dt id="euchar.filtrations.alpha_filtration_2d">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2d</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute sorted simplices and sorted parametrization of 2D 
-point cloud.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>points</dt><dd><p>array of points in 2D</p>
+<dt id="euchar.filtrations.alpha_filtration_2D">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2D</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplices and corresponding parametrization of 2D point cloud.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>np.ndarray of shape (N, 2)</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>sorted_simplices</dt><dd><p>array of integers of shape (N,3) using -1 as placeholder
+<dt>simplices</dt><dd><p>array of integers of shape (N,3) using -1 as placeholder
 Ex. [1,-1,-1] is vertex 1 and [3,5,-1] is edge (3,5).</p>
 </dd>
-<dt>sorted_parametrization</dt><dd><p>array of floats corresponding to the filtration parameter of
-each simplex.</p>
+<dt>parametrization</dt><dd><p>array of floats corresponding to the Alpha filtration parameter
+of each simplex.</p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="function">
-<dt id="euchar.filtrations.alpha_filtration_3d">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_3d</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_3d" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return sorted parametrization and sorted simplices.</p>
+<dt id="euchar.filtrations.alpha_filtration_3D">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_3D</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplices and corresponding parametrization of 3D point cloud.</p>
 <dl class="simple">
-<dt>points</dt><dd><p>array of points in 3D</p>
+<dt>points</dt><dd><p>np.ndarray of shape (N, 3)</p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>sorted_param</dt><dd><p>array of floats corresponding to the filtration parameter of
-each simplex.</p>
+<dt>simplices</dt><dd><p>array of integers of shape (N, 4) using -1 as placeholder
+Ex. [1,-1,-1,-1] is vertex 1 and [3,5,-1,-1] is edge (3,5).</p>
 </dd>
-<dt>sorted_simplices</dt><dd><p>array of integers of shape (N,4) using -1 as placeholder
-Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
+<dt>parametrization</dt><dd><p>array of floats corresponding to the Alpha filtration parameter
+of each simplex.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -78,33 +76,37 @@ Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
 <dl class="function">
 <dt id="euchar.filtrations.delaunay_ed_tri">
 <code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Delaunay triangulation simplices of two dimensional points.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="euchar.filtrations.delaunay_ed_tri_tetra">
 <code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri_tetra</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri_tetra" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.density_filtration">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">density_filtration</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">simplices</em>, <em class="sig-param">n_neighbors</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.density_filtration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parametrization of simplices based on local density at vertices.</p>
+<dd><p>Delauanay triangulation simplices of three dimensional points.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="euchar.filtrations.dimension">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">dimension</code><span class="sig-paren">(</span><em class="sig-param">simplex</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.dimension" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.filter_simplices_on">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">filter_simplices_on</code><span class="sig-paren">(</span><em class="sig-param">vertices</em>, <em class="sig-param">simplices</em>, <em class="sig-param">parametrization</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.filter_simplices_on" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.fix_indices_param">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">fix_indices_param</code><span class="sig-paren">(</span><em class="sig-param">indices</em>, <em class="sig-param">param</em>, <em class="sig-param">simplices</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.fix_indices_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="euchar.filtrations.inverse_density_filtration">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">inverse_density_filtration</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">simplices</em>, <em class="sig-param">n_neighbors</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.inverse_density_filtration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parametrization of simplices based on inverse of local density
+at vertices. The inverse of the density at each <cite>p</cite> in <cite>points</cite>
+is estimated as the root mean square of the distances from <cite>p</cite> to
+its <cite>n</cite> nearest neighbors.</p>
+<dl class="simple">
+<dt>points</dt><dd><p>np.ndarray of shape (N, d)</p>
+</dd>
+<dt>simplices</dt><dd><p>np.ndarray of shape (M, d+1)</p>
+</dd>
+<dt>n_neighbors</dt><dd><p>int, number of nearest neighbors of a point <cite>p</cite> in <cite>points</cite>
+used to estimate the local density around <cite>p</cite>.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>density_parametrization</dt><dd><p>1-D np.ndarray, parametrization of <cite>simplices</cite>. The value of a 
+simplex is the maximum of any of its vertices.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
@@ -134,16 +136,19 @@ Ex. [1,-1,-1, -1] is vertex 1 and [3,5,-1, -1] is edge (3,5).</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Filtrations</a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="curve.html" title="previous chapter">Euler characteristic curves functions</a></li>
+      <li>Previous: <a href="surface.html" title="previous chapter">Euler characteristic surface functions</a></li>
+      <li>Next: <a href="display.html" title="next chapter">Euler characteristic plotting</a></li>
   </ul></li>
 </ul>
 </div>
