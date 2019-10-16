@@ -1,5 +1,5 @@
-Euler characteristic curves functions
-=======================================
+Docs: ``curve`` module
+=========================
 
 Contents:
 

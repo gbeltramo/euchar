@@ -1,4 +1,4 @@
-Filtrations
+Docs: ``filtrations`` module
 ===========================
 
 Contents:

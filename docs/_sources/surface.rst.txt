@@ -1,4 +1,4 @@
-Euler characteristic surface functions
+Docs: ``surface`` module
 =======================================
 
 Contents:

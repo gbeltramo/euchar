@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Utility functions &#8212; euchar 0.1 documentation</title>
+    <title>Docs: utils module &#8212; euchar 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,9 +12,10 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Euler characteristic curves functions" href="curve.html" />
+    <link rel="next" title="Docs: curve module" href="curve.html" />
     <link rel="prev" title="Welcome to euchar’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,8 +33,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="utility-functions">
-<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="docs-utils-module">
+<h1>Docs: <code class="docutils literal notranslate"><span class="pre">utils</span></code> module<a class="headerlink" href="#docs-utils-module" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -182,13 +183,13 @@ of the triangle.</p>
 <code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">simplices_to_dimensions</code><span class="sig-paren">(</span><em class="sig-param">simplices</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.simplices_to_dimensions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms an array of simplices to an array of their dimensions.</p>
 <p>Given the array of simplices</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">[[1</span> <span class="pre">-1</span> <span class="pre">-1],</span> <span class="pre">[3</span> <span class="pre">4</span> <span class="pre">-1],</span> <span class="pre">[10</span> <span class="pre">12</span> <span class="pre">15]]</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[[</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span> <span class="mi">12</span> <span class="mi">15</span><span class="p">]]</span>
+</pre></div>
+</div>
 <p>the output will be</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">[0</span> <span class="pre">1</span> <span class="pre">2]</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -201,10 +202,10 @@ in a 3x3 binary neighbourhood.</p>
 
 <dl class="function">
 <dt id="euchar.utils.vector_all_euler_changes_in_3D_images">
-<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_3D_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_3D_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">euchar.utils.</code><code class="sig-name descname">vector_all_euler_changes_in_3D_images</code><span class="sig-paren">(</span><em class="sig-param">start=0</em>, <em class="sig-param">end=67108864</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.utils.vector_all_euler_changes_in_3D_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a vector of 67,108,864 integers, containing all the
 possible Euler characteristic changes produced by the insertion of
-a central pixel in a 3x3x3 binary neighbourhood.</p>
+a central voxel in a 3x3x3 binary neighbourhood.</p>
 <p>It is recommended to produce this vector once and to write it 
 to a file. For example with numpy</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vector_changes</span> <span class="o">=</span> <span class="n">vector_all_euler_changes_in_3d_images</span><span class="p">()</span>
@@ -246,6 +247,9 @@ points A, B, C, D.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
 <h1 class="logo"><a href="index.html">euchar</a></h1>
 
 
@@ -256,15 +260,14 @@ points A, B, C, D.</p>
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docs: <code class="docutils literal notranslate"><span class="pre">utils</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Docs: <code class="docutils literal notranslate"><span class="pre">curve</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Docs: <code class="docutils literal notranslate"><span class="pre">surface</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Docs: <code class="docutils literal notranslate"><span class="pre">filtrations</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Docs: <code class="docutils literal notranslate"><span class="pre">display</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_curve/example_euler_char_curve.html">Usage example: Euler characteristic curves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_surface/example_euler_char_surface.html">Usage example: Euler characteristic surfaces</a></li>
 </ul>
 
 <div class="relations">
@@ -272,7 +275,7 @@ points A, B, C, D.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to <strong>euchar</strong>’s documentation!</a></li>
-      <li>Next: <a href="curve.html" title="next chapter">Euler characteristic curves functions</a></li>
+      <li>Next: <a href="curve.html" title="next chapter">Docs: <code class="docutils literal notranslate"><span class="pre">curve</span></code> module</a></li>
   </ul></li>
 </ul>
 </div>

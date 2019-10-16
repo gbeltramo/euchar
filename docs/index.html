@@ -12,9 +12,10 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Utility functions" href="utils.html" />
+    <link rel="next" title="Docs: utils module" href="utils.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,7 +35,13 @@
   <div class="section" id="welcome-to-euchar-s-documentation">
 <h1>Welcome to <strong>euchar</strong>’s documentation!<a class="headerlink" href="#welcome-to-euchar-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>This is the documentation of the <code class="docutils literal notranslate"><span class="pre">euchar</span></code> Python package.</p>
-<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> provides Python bindings to C++ implementations for computing the Euler characteristic curves and Euler characteristic surfaces of given images or finite point sets, in the two and three dimensional case.</p>
+<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> provides Python bindings to C++ algorithms for the
+computation of Euler characteristic curves and Euler characteristic
+surfaces of</p>
+<ul class="simple">
+<li><p>2D and 3D images, i.e. matrices of integers in some range <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">m]</span></code></p></li>
+<li><p>2D and 3D finite point sets.</p></li>
+</ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>For the package to install correctly the prerequisites are</p>
@@ -42,49 +49,48 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">CMake</span></code> version &gt;= 3.5</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> version &gt;= 2.2</p></li>
 </ul>
-<p>This module makes use of features provided by the following Python modules</p>
+<p>This package makes use of features provided by the following Python packages</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, used in the <code class="docutils literal notranslate"><span class="pre">display</span></code> module of the package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scipy</span></code>, used to obtain Delaunay triangulations of 2D and 3d finite point sets</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> can be installed with the following command</p>
-<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">euchar</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">euchar</span></code> can be installed with</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">euchar</span></code></p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>See the <code class="docutils literal notranslate"><span class="pre">github</span></code> page of the package at <code class="docutils literal notranslate"><span class="pre">https://github.com/gbeltramo/euchar</span></code>.</p>
-<p>Examples can be found in the <code class="docutils literal notranslate"><span class="pre">/notebooks/</span></code> directory in the form of Jupyter notebooks.</p>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a><ul class="simple">
+<ul class="simple">
+<li><p><a class="reference internal" href="usage_curve/example_euler_char_curve.html#usage-example-euler-characteristic-curves"><span class="std std-ref">Usage example: Euler characteristic curves</span></a></p></li>
+<li><p><a class="reference internal" href="usage_surface/example_euler_char_surface.html#usage-example-euler-characteristic-surfaces"><span class="std std-ref">Usage example: Euler characteristic surfaces</span></a></p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a><ul class="simple">
-</ul>
-</li>
-</ul>
+<p>The same usage examples can also be found in the <code class="docutils literal notranslate"><span class="pre">/notebooks/</span></code>
+directory of the github page of the project in the form of Jupyter
+notebooks.</p>
 </div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Docs: <code class="docutils literal notranslate"><span class="pre">utils</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Docs: <code class="docutils literal notranslate"><span class="pre">curve</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Docs: <code class="docutils literal notranslate"><span class="pre">surface</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Docs: <code class="docutils literal notranslate"><span class="pre">filtrations</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Docs: <code class="docutils literal notranslate"><span class="pre">display</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_curve/example_euler_char_curve.html">Usage example: Euler characteristic curves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_surface/example_euler_char_surface.html">Usage example: Euler characteristic surfaces</a></li>
+</ul>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
+</div>
 </div>
 
 
@@ -94,6 +100,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
 <h1 class="logo"><a href="#">euchar</a></h1>
 
 
@@ -104,20 +113,21 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="curve.html">Euler characteristic curves functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="surface.html">Euler characteristic surface functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Filtrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="display.html">Euler characteristic plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Docs: <code class="docutils literal notranslate"><span class="pre">utils</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curve.html">Docs: <code class="docutils literal notranslate"><span class="pre">curve</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">Docs: <code class="docutils literal notranslate"><span class="pre">surface</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtrations.html">Docs: <code class="docutils literal notranslate"><span class="pre">filtrations</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Docs: <code class="docutils literal notranslate"><span class="pre">display</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_curve/example_euler_char_curve.html">Usage example: Euler characteristic curves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_surface/example_euler_char_surface.html">Usage example: Euler characteristic surfaces</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="utils.html" title="next chapter">Utility functions</a></li>
+      <li>Next: <a href="utils.html" title="next chapter">Docs: <code class="docutils literal notranslate"><span class="pre">utils</span></code> module</a></li>
   </ul></li>
 </ul>
 </div>
