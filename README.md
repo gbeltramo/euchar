@@ -1,8 +1,8 @@
 # euchar
 
-Compute Euler Characteristic curves and surfaces of image and point data   https://gbeltramo.github.io/euchar/.. 
+Compute Euler Characteristic curves and surfaces of image and point data.
 
-### Installation
+## Installation
 
 For the package to install correctly the prerequisites are
 
@@ -17,7 +17,11 @@ This module makes use of features provided by the following Python modules
 - scikit-learn, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
 
 
-### Examples
+## Examples
 
 See the `/notebooks/` directory of the github page for usage examples.
 
+
+## Documentation
+
+The documentation for this project is available at https://gbeltramo.github.io/euchar/

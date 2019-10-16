@@ -80,7 +80,7 @@ setup(
     description="Euler characteristic of images and finite point sets.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://gbeltramo.github.io/euchar/",
+    url="https://github.com/gbeltramo/euchar",
     license='MIT',
     install_requires=[
         'numpy',
