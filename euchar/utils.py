@@ -47,11 +47,11 @@ def vector_all_euler_changes_in_2D_images():
 
 #=================================================
 
-def vector_all_euler_changes_in_3D_images():
+def vector_all_euler_changes_in_3D_images(start=0, end=67_108_864):
     """
     Returns a vector of 67,108,864 integers, containing all the
     possible Euler characteristic changes produced by the insertion of
-    a central pixel in a 3x3x3 binary neighbourhood.
+    a central voxel in a 3x3x3 binary neighbourhood.
     
     Notes
     -----
@@ -66,10 +66,9 @@ def vector_all_euler_changes_in_3D_images():
     >>> vector_changes = np.load("/path/to/dir/changes_3d.npy")
     """
     
-    print("This may take a while...")
-    print("It is recommended to save the result to a file,\n and to load it when needed.")
+    print("\n-----\nIt is recommended to save the result to a file, and to load it when needed.\n-----\n")
 
-    list_3d_changes = vector_of_euler_changes_3d(0, 67_108_864) # 2**26
+    list_3d_changes = vector_of_euler_changes_3d(start, end)
     return np.array(list_3d_changes)
 
 #=================================================
@@ -366,15 +365,11 @@ def simplices_to_dimensions(simplices):
     -------
     Given the array of simplices
     
-    ```
-    [[1 -1 -1], [3 4 -1], [10 12 15]]
-    ```
+    >>> [[1 -1 -1], [3 4 -1], [10 12 15]]
 
     the output will be 
 
-    ```
-    [0 1 2]
-    ```
+    >>> [0 1 2]
 
     """
     def dim_simplex(sim):

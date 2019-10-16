@@ -98,8 +98,8 @@ def image_3D(image, vector_of_euler_changes_3D=None, max_intensity=255):
         return None
 
     try:
-        err_line1 = "You must pass in the vector of all possible Euler"
-        err_line2 = "characteristic changes for 3D images, which can be"
+        err_line1 = "You must pass in the vector of all possible Euler\n"
+        err_line2 = "characteristic changes for 3D images, which can be\n"
         err_line3 = "computed with euchar.utils.vector_all_euler_changes_in_3D_images.\n---"
         assert vector_of_euler_changes_3D is not None, err_line1 + err_line2 + err_line3
     except AssertionError as err:
@@ -139,7 +139,7 @@ def filtration(simplices, parametrization, bins):
     """
 
     try:
-        err_line1 = "`simplices` and `parametrization` must have same"
+        err_line1 = "`simplices` and `parametrization` must have same\n"
         err_line2 = "length."
         assert len(simplices) == len(parametrization), err_line1+err_line2
     except AssertionError as err:

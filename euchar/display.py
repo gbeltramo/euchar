@@ -56,6 +56,7 @@ def visualize_triangle_alpha_parametrization(triangle, points, figsize=(3,3)):
 
     Parameters
     ----------
+
     triangle
        np.ndarray of three integers, the indices of the vertices of the 
         triangle in `points`
@@ -93,6 +94,7 @@ def visualize_triangle_alpha_parametrization(triangle, points, figsize=(3,3)):
 #=================================================
     
 def visualize_tetrahedron_alpha_parametrization(tetrahedron, points, figsize=(3,3)):
+    """Visualize the miniball of a tetrahedron in 3D."""
     
     def plot_sphere(C, r, tetra=None, n=100, figsize=(5,5)):
         fig = plt.figure(figsize=figsize)
@@ -101,14 +103,12 @@ def visualize_tetrahedron_alpha_parametrization(tetrahedron, points, figsize=(3,
         print("radius is:", r)
         radius_ok = []
         inside = []
-        print("Distances from points to center miniball are: ", end="")
+        print("Distances from points to center miniball are:")
         for point in tetra:
             radius_ok.append(np.isclose(r, euclidean(C, point)))
             inside.append(r+0.00000001 >= euclidean(C, point))
             print(euclidean(C, point), end=" | ")
     
-        print("\n\nIs radius equal to distance points to center?", all(radius_ok))
-        print("Are points inside?", all(inside))
         # Make data
         w = np.linspace(0, 2 * np.pi, 100)
         v = np.linspace(0, np.pi, 100)

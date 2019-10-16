@@ -2,6 +2,7 @@ import numpy as np
 import euchar.utils as u
 import euchar.filtrations as f
 import euchar.curve as c
+from euchar.cppbinding.utils import char_binary_image_2d
 import euchar.cppbinding.surface as cppsurface
 
 #=================================================
