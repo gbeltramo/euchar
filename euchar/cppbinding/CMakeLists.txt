@@ -11,4 +11,4 @@ pybind11_add_module(curve MODULE curve.cpp)
 target_compile_features(curve PUBLIC cxx_std_11)
 
 pybind11_add_module(surface MODULE surface.cpp)
-target_compile_features(surfacePUBLIC cxx_std_11)
+target_compile_features(surface PUBLIC cxx_std_11)
