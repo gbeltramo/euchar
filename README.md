@@ -6,7 +6,7 @@ Compute Euler Characteristic curves and surfaces of image and point data.
 
 For the package to install correctly the prerequisites are
 
-- CMake version >= 3.5
+- CMake version >= 3.8
 - pybind11 version >= 2.2
 
 This module makes use of features provided by the following Python modules
