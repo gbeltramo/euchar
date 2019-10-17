@@ -46,9 +46,6 @@ class CMakeBuild(build_ext):
             build_args += ['--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            build_args += ['--', '-j2']
-            if cfg == "Release":
-                build_args += ['-O3']
 
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
@@ -73,7 +70,7 @@ surface = CMakeExtension(name="surface",
                          sourcedir="euchar/cppbinding/")
 setup(
     name='euchar',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages("."),
     author="Gabriele Beltramo",
     author_email="gabri.beltramo@gmail.com",
