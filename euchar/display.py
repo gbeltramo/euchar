@@ -4,9 +4,8 @@ import euchar.utils as u
 from scipy.spatial.distance import euclidean
 
 #=================================================
-
-def matplotlib_plot(rows=1, columns=1, figsize=(4,4),
-                    font_size=12, facecolor="white"):
+def matplotlib_plot(rows=1, columns=1, figsize=(4,4), facecolor="w",
+                    font_size=10, font_family="CMU Serif"):
     """
     Returns a fig and ax object.
     
@@ -21,7 +20,9 @@ def matplotlib_plot(rows=1, columns=1, figsize=(4,4),
     font_size
         int
     facecolor
-        string, default 'white'. Also RGB colors '#cccccc'.
+        string, default 'white'.
+    font_family
+        string
     
     Returns
     -------
@@ -41,11 +42,21 @@ def matplotlib_plot(rows=1, columns=1, figsize=(4,4),
     >>> plt.show()
     
     """
+
     figsize = (figsize[0]*columns, figsize[1]*rows)
     fig, ax = plt.subplots(rows, columns, figsize=figsize)
-    plt.rc('font', size=font_size)
+    
+    # Global Setting
+    plt.rcParams['font.family'] = 'CMU Serif'
+    plt.rcParams['font.size'] = str(font_size)              
+    plt.rcParams['mathtext.fontset'] = 'cm'       
+    plt.rcParams['mathtext.rm'] = 'CMU Serif'      
+    plt.rcParams['grid.color'] = '#F0F0F0'
+    plt.rcParams['grid.linestyle'] = 'solid'
+    plt.rcParams['text.usetex'] = True   
+    
     fig.patch.set_facecolor(facecolor)
-    fig.tight_layout()
+    
     return fig, ax
 
 #=================================================
@@ -196,15 +207,16 @@ def piecewise_constant_surface(bins1, bins2, surface):
 #=================================================
 
 def euler_curve_plot(fig, ax, bins, euler_char_curve, 
-                     line_color="k", line_width=1,
-                     xticks=[0], yticks=[0], 
+                     line_color="k", line_width=2,
                      xlabel="Parameter", ylabel="$\chi(K)$", 
                      title="", 
                      xlim=None, ylim=None,
-                     xticks_locations=None, yticks_locations=None,
-                     xticks_spacing=None, yticks_spacing=None,
-                     x_arrow_head_width=None, x_arrow_head_length=None,
-                     y_arrow_head_width=None, y_arrow_head_length=None,
+                     size_arrows=None,
+                     xticks=None, yticks=None, 
+                     xticks_length=None, xticks_width=None,
+                     yticks_length=None, yticks_width=None,
+                     xticks_locations=None,
+                     yticks_locations=None,
                      font_size_ticks=12):
     """
     Display an Euler characteristic curve as a piecewise constant curve. 
@@ -238,9 +250,9 @@ def euler_curve_plot(fig, ax, bins, euler_char_curve,
         floats
 
     """
-    
     new_bins, new_curve = piecewise_constant_curve(bins, euler_char_curve)
-
+    shape_pixels = fig.get_size_inches()*fig.dpi
+    
     ax.plot(new_bins, new_curve, color=line_color,
             linewidth=line_width, marker="", alpha=1, zorder=3)
     
@@ -251,62 +263,64 @@ def euler_curve_plot(fig, ax, bins, euler_char_curve,
         ylim = [min(euler_char_curve), max(euler_char_curve)*1.2]
     ax.set(xlim=xlim, ylim=ylim, title=title)
     
+    # define proportion arrows
+    if size_arrows is None:
+        size_arrows = int((shape_pixels[0] + shape_pixels[1])/50)
+    
+    x_arrow_head_width = (ylim[1]-ylim[0]) / shape_pixels[1] * size_arrows / 1.27
+    x_arrow_head_length = (xlim[1] - xlim[0]) / shape_pixels[0] * size_arrows * 1.27
+    y_arrow_head_width = (xlim[1]-xlim[0]) / shape_pixels[0] * size_arrows / 1.27
+    y_arrow_head_length = (ylim[1] - ylim[0]) / shape_pixels[1] * size_arrows* 1.27
+    
     # axes off
     ax.axis("off")
     
     
     # x-axis
-    if x_arrow_head_width is None:
-        x_arrow_head_width = (ylim[1]-ylim[0]) * 0.04
-    if x_arrow_head_length is None:    
-        x_arrow_head_length = (xlim[1] - xlim[0]) * 0.04
-        
-    ax.arrow(x=xlim[0] - abs(xlim[1] - xlim[0])*0.05,
-             y=0, dx=xlim[1] - xlim[0], dy=0,
+    ax.arrow(x=xlim[0], y=0, 
+             dx=xlim[1] - xlim[0] - x_arrow_head_length, dy=0,
              head_width=x_arrow_head_width,
              head_length=x_arrow_head_length,
              fc="k", zorder=1)
     
+    if xticks_length is None:
+        xticks_length = (ylim[1] - ylim[0]) / 30
+    if xticks_width is None:
+        xticks_width = 1
     if xticks_locations is None:
-        xticks_locations = [(xt-x_arrow_head_length/2,
-                             -x_arrow_head_width*2) for xt in xticks]
-    if xticks_spacing is None:
-        xticks_spacing = (0, -x_arrow_head_width)
+        xticks_locations = [(tick - y_arrow_head_width * 0.8, 
+                             -(1.8 * y_arrow_head_length)) for tick in xticks]
         
-    for tick in xticks[1:]:
-        ax.annotate("'", xy=(0, 0), xytext=(xticks_spacing[0]+tick, 
-                                            xticks_spacing[1]))
-    for tick, (loc_x, loc_y) in zip(xticks, xticks_locations):
-        ax.annotate(str(tick), xy=(0, 0), xytext=(loc_x, loc_y), 
+    for tick, location in zip(xticks, xticks_locations):
+        ax.plot([tick, tick], [0, -xticks_length], color="k", linewidth=xticks_width)
+        ax.annotate(str(tick), xy=(0,0), xytext=location,
                     fontsize=font_size_ticks)
         
     # y-axis
-    if y_arrow_head_width is None:
-        y_arrow_head_width = (xlim[1]-xlim[0]) * 0.04
-    if y_arrow_head_length is None:    
-        y_arrow_head_length = (ylim[1] - ylim[0]) * 0.04
-        
-    ax.arrow(x=bins[0],y=ylim[0] - abs(ylim[1] - ylim[0])*0.05, 
-             dx=bins[0], dy=ylim[1] - ylim[0],
+    ax.arrow(x=bins[0], y=ylim[0], dx=0, 
+             dy=ylim[1] - ylim[0] - y_arrow_head_length,
              head_width=y_arrow_head_width,
              head_length=y_arrow_head_length,
              fc="k", zorder=1)
-    
+    if yticks_length is None:
+        yticks_length = (xlim[1] - xlim[0]) / 30
+    if yticks_width is None:
+        yticks_width = 1
     if yticks_locations is None:
-        yticks_locations = [(-y_arrow_head_width*2, yt) for yt in yticks]
-    if yticks_spacing is None:
-        yticks_spacing = (-y_arrow_head_width, 0)
-        
-    for tick, (loc_x, loc_y) in zip(yticks, yticks_locations):
-        ax.annotate("-", xy=(0, 0), xytext=(yticks_spacing[0],
-                                            yticks_spacing[1]+tick))
-        ax.annotate(str(tick), xy=(0, 0), xytext=(loc_x, loc_y), 
-                    fontsize=font_size_ticks)
+        yticks_locations = [(-(1.5 * x_arrow_head_length) * len(str(tick)), 
+                             tick - x_arrow_head_width * 0.8) for tick in yticks]
+    
+    for tick, location in zip(yticks, yticks_locations):
+        ax.plot([-yticks_length, 0], [tick, tick],
+                 color="k", linewidth=xticks_width)
+        ax.annotate(str(tick), xy=(0,0), xytext=location,
+                   fontsize=font_size_ticks)
 
 #=================================================
 
 def euler_surface_plot(fig, ax, bins1, bins2, euler_char_surf, 
-                       n_levels=30, min_level=None, max_level=None,
+                       n_levels=30, levels=None,
+                       min_level=None, max_level=None,
                        xticks=None, yticks=None, colorbar_ticks=None,
                        xlim=None, ylim=None,
                        xlabel="Parametrization 1",
@@ -355,8 +369,9 @@ def euler_surface_plot(fig, ax, bins1, bins2, euler_char_surf,
         max_level = euler_char_surf.max()
     if colorbar_ticks is None:
         colorbar_ticks = [min_level, max_level]
-    levels = [int(el) for el in np.linspace(min_level, max_level, num=n_levels)]
-
+    if levels is None:
+        levels = [int(el) for el in np.linspace(min_level, max_level, num=n_levels)]
+    
     # Color map
     cmap = plt.get_cmap(color_map)
     

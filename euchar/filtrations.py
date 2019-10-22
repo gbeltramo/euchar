@@ -5,49 +5,44 @@ from scipy.spatial.distance import euclidean
 
 #=================================================
 
-def delaunay_ed_tri(points):
+def Delaunay_ed_tri_2D(points):
     """Delaunay triangulation simplices of two dimensional points."""
     if points.shape[1] != 2:
         raise ValueError("Points need to be a two dimensional np.ndarray.")
 
-    tri = Delaunay(points)
-    arr_triangles = np.array([np.sort(unsort_tri)
-                              for unsort_tri in tri.simplices])
-
-    edges = set()
-    for t in arr_triangles:
-        i1, j1 = t[0], t[1]
-        i2, j2 = t[0], t[2]
-        i3, j3 = t[1], t[2]
-        edges.add((i1, j1))
-        edges.add((i2, j2))
-        edges.add((i3, j3))
-
-    return np.array(list(edges)), arr_triangles
+    delaunay_complex = Delaunay(points)
+    triangles = np.array([np.sort(simplex) 
+                          for simplex in delaunay_complex.simplices])
+    masks_edges = np.array([[0,1], [0,2], [1,2]])
+    edges = np.unique(np.vstack([t[masks_edges]
+                                 for t in triangles]),
+                      axis=0)
+    
+    return edges, triangles
 
 #=================================================
 
-def delaunay_ed_tri_tetra(points):
+def Delaunay_ed_tri_tetra_3D(points):
     """Delauanay triangulation simplices of three dimensional points."""
     if points.shape[1] !=3:
         raise ValueError("Points need to be a three dimensional np.ndarray.")
-    tetra = Delaunay(points)
-    arr_tetrahedra = np.array([np.sort(unsort_tetra)
-                               for unsort_tetra in tetra.simplices])
-    edges = set()
-    triangles = set()
-    for tetra in arr_tetrahedra:
-        v1, v2, v3, v4 = tetra
-        edges.add((v1, v2))
-        edges.add((v1, v3))
-        edges.add((v2, v3))
-        triangles.add((v1, v2, v3))
-        triangles.add((v1, v2, v4))
-        triangles.add((v1, v3, v4))
-        triangles.add((v2, v3, v4))
-
-    return (np.array(list(edges)), np.array(list(triangles)),
-                    arr_tetrahedra)
+    delaunay_complex = Delaunay(points)
+    tetrahedra = np.array([np.sort(simplex)
+                           for simplex in delaunay_complex.simplices])
+    
+    masks_edges = np.array([[0,1], [0,2], [0,3],
+                            [1,2], [1,3], [2,3]])
+    edges = np.unique(np.vstack([tet[masks_edges]
+                                 for tet in tetrahedra]),
+                      axis=0)
+    
+    masks_triangles = np.array([[0, 1, 2], [0, 1, 3],
+                                [0, 2, 3], [1, 2, 3]])
+    triangles = np.unique(np.vstack([tet[masks_triangles]
+                                     for tet in tetrahedra]),
+                          axis=0)
+    
+    return edges, triangles, tetrahedra
 
 #=================================================
 
@@ -58,7 +53,7 @@ def alpha_filtration_2D(points):
     Parameters
     ----------
     points
-        np.ndarray of shape (N, 2)
+        np.ndarray of shape (N, 3)
     
     Returns
     -------
@@ -73,7 +68,7 @@ def alpha_filtration_2D(points):
 
     # Get vertices, and Delaunay simplices
     vertices = np.arange(len(points))
-    edges, triangles = delaunay_ed_tri(points)
+    edges, triangles = Delaunay_ed_tri_2D(points)
 
     # Make simplices, with -1 as a placeholder
     vertices = np.array([[v, -1, -1] for v in vertices])
@@ -117,7 +112,7 @@ def alpha_filtration_3D(points):
     """
     # Get vertices, and Delaunay simplices
     vertices = np.arange(len(points))
-    edges, triangles, tetrahedra = delaunay_ed_tri_tetra(points)
+    edges, triangles, tetrahedra = Delaunay_ed_tri_tetra_3D(points)
 
     # Make simplices, with -1 as a placeholder
     vertices = np.array([[v, -1, -1, -1] for v in vertices])
@@ -141,6 +136,10 @@ def alpha_filtration_3D(points):
                                  par_triangles, par_tetrahedra])
 
     return simplices, parametrization
+
+
+
+    return np.array(parametrization)
 
 #=================================================
 
