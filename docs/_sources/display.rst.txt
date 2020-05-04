@@ -1,0 +1,21 @@
+Docs: ``display`` module
+=======================================
+
+The functions in this module use ``matplotlib`` to produce plots of
+Euler characteristic curves and surfaces.
+
+Contents:
+
+.. toctree::
+    :maxdepth: 2
+
+.. automodule:: euchar.display
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

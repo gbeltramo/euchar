@@ -1,0 +1,67 @@
+.. euchar documentation master file, created by
+   sphinx-quickstart on Fri Sep 27 16:31:47 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to **euchar**'s documentation!
+============================================
+
+This is the documentation of the ``euchar`` Python package.
+
+``euchar`` provides Python bindings to C++ algorithms for the
+computation of Euler characteristic curves and Euler characteristic
+surfaces of
+
+- 2D and 3D images, i.e. matrices of integers in some range ``[0, m]``
+- 2D and 3D finite point sets.
+
+Installation
+--------------
+
+For the package to install correctly the prerequisites are
+
+- ``CMake`` version >= 3.5
+- ``pybind11`` version >= 2.2
+
+This package makes use of features provided by the following Python packages
+
+- ``numpy``
+- ``matplotlib``, used in the ``display`` module of the package
+- ``scipy``, used to obtain Delaunay triangulations of 2D and 3d finite point sets
+- ``scikit-learn``, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
+
+``euchar`` can be installed with
+
+``pip install euchar``
+
+Examples
+----------
+
+- :ref:`Usage example: Euler characteristic curves`
+- :ref:`Usage example: Euler characteristic surfaces`
+
+The same usage examples can also be found in the ``/notebooks/``
+directory of the github page of the project in the form of Jupyter
+notebooks.
+
+Contents
+----------
+
+.. toctree::
+    :maxdepth: 1
+
+    utils
+    curve
+    surface
+    filtrations
+    display
+    usage_curve/example_euler_char_curve
+    usage_surface/example_euler_char_surface
+
+
+Indices and tables
+----------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

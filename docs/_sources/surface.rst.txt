@@ -1,0 +1,17 @@
+Docs: ``surface`` module
+=======================================
+
+Contents:
+
+.. toctree::
+    :maxdepth: 2
+
+.. automodule:: euchar.surface
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
