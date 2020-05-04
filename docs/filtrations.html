@@ -7,12 +7,12 @@
     <title>Docs: filtrations module &#8212; euchar 0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Docs: display module" href="display.html" />
@@ -39,11 +39,23 @@
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-euchar.filtrations"></span><dl class="function">
+<dt id="euchar.filtrations.Delaunay_ed_tri_2D">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">Delaunay_ed_tri_2D</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.Delaunay_ed_tri_2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delaunay triangulation simplices of two dimensional points.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="euchar.filtrations.Delaunay_ed_tri_tetra_3D">
+<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">Delaunay_ed_tri_tetra_3D</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.Delaunay_ed_tri_tetra_3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delauanay triangulation simplices of three dimensional points.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="euchar.filtrations.alpha_filtration_2D">
 <code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">alpha_filtration_2D</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.alpha_filtration_2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simplices and corresponding parametrization of 2D point cloud.</p>
 <dl class="simple">
-<dt>points</dt><dd><p>np.ndarray of shape (N, 2)</p>
+<dt>points</dt><dd><p>np.ndarray of shape (N, 3)</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -72,18 +84,6 @@ Ex. [1,-1,-1,-1] is vertex 1 and [3,5,-1,-1] is edge (3,5).</p>
 of each simplex.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.delaunay_ed_tri">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delaunay triangulation simplices of two dimensional points.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="euchar.filtrations.delaunay_ed_tri_tetra">
-<code class="sig-prename descclassname">euchar.filtrations.</code><code class="sig-name descname">delaunay_ed_tri_tetra</code><span class="sig-paren">(</span><em class="sig-param">points</em><span class="sig-paren">)</span><a class="headerlink" href="#euchar.filtrations.delaunay_ed_tri_tetra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delauanay triangulation simplices of three dimensional points.</p>
 </dd></dl>
 
 <dl class="function">
@@ -164,7 +164,7 @@ simplex is the maximum of any of its vertices.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -181,7 +181,7 @@ simplex is the maximum of any of its vertices.</p>
       &copy;2019, Gabriele Beltramo.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
