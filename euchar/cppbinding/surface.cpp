@@ -11,7 +11,7 @@ int sum_bool_2d(vector<vector<bool>> matrix)
 {
     size_t numI = matrix.size();
     size_t numJ = matrix[0].size();
-    
+
     int total = 0;
     for (size_t i = 0; i < numI; ++i) {
         for (size_t j = 0; j < numJ; ++j) {
@@ -29,7 +29,7 @@ vector<vector<int>> pad_2d(const vector<vector<int>> &image, int M)
 {
     size_t numI = image.size();
     size_t numJ = image[0].size();
-    
+
     vector<vector<int>> padded(numI+2, vector<int>(numJ+2, M));
 
     for (size_t i = 0; i < numI; ++i) {
@@ -108,7 +108,7 @@ vector<vector<int>> neigh_pixel_2d(const vector<vector<int>> &padded, size_t i ,
 vector<vector<bool>> binary_neigh_pixel_2d(const vector<vector<int>> &padded, size_t i , size_t j , int pixel_value)
 {
     vector<vector<int>> neigh_3_3 = neigh_pixel_2d(padded, i, j);
-    
+
     vector<vector<bool>> binary_neigh_3_3(3, vector<bool>(3, false));
 
     for (size_t i = 0; i < 3; ++i) {
@@ -116,7 +116,7 @@ vector<vector<bool>> binary_neigh_pixel_2d(const vector<vector<int>> &padded, si
             // need to take account of order pixels
             // strinct inequality after central pixel
             size_t k = j + i*3;
-            
+
             if (k < 5) {  // up to central pixel included
                 if (neigh_3_3[i][j] <= pixel_value)
                     binary_neigh_3_3[i][j] = true;
@@ -207,7 +207,7 @@ int sum_bool_3d(vector<vector<vector<bool>>> matrix)
             }
         }
     }
-    
+
     return total;
 }
 
@@ -218,7 +218,7 @@ vector<vector<vector<int>>> pad_3d(const vector<vector<vector<int>>> &image, int
     size_t numI = image.size();
     size_t numJ = image[0].size();
     size_t numK = image[0][0].size();
-    
+
     vector<vector<vector<int>>> padded(numI+2, vector<vector<int>>(numJ+2, vector<int>(numK+2, M)));
 
     for (size_t i = 0; i < numI; ++i) {
@@ -234,7 +234,7 @@ vector<vector<vector<int>>> pad_3d(const vector<vector<vector<int>>> &image, int
 
 //================================================
 
-vector<vector<vector<bool>>> threshold_image_3d(const vector<vector<vector<int>>> &image, int value) 
+vector<vector<vector<bool>>> threshold_image_3d(const vector<vector<vector<int>>> &image, int value)
 {
     size_t numI = image.size();
     size_t numJ = image[0].size();
@@ -278,7 +278,7 @@ vector<vector<vector<bool>>> elementwise_AND_3d(const vector<vector<vector<bool>
         }
 
     }
-    
+
     return result;
 }
 
@@ -335,18 +335,18 @@ vector<vector<vector<bool>>> binary_neigh_voxel_3d(const vector<vector<vector<in
                 // need to take account of order pixels
                 // strinct inequality after central pixel
                 size_t s = k + j*3 + i*9;
-            
+
                 if (s < 14) {  // up to central pixel included
                     if (neigh_3_3_3[i][j][k] <= voxel_value)
                         binary_neigh_3_3_3[i][j][k] = true;
                 } else {
                     if (neigh_3_3_3[i][j][k] < voxel_value)
                         binary_neigh_3_3_3[i][j][k] = true;
-                }   
+                }
             }
         }
     }
-    
+
 
     return binary_neigh_3_3_3;
 }
@@ -367,7 +367,7 @@ int char_binary_image_3d(vector<vector<vector<bool>>> input)
     vector<vector<vector<bool>>> Fik(numI, vector<vector<bool>>(numJ+1, vector<bool>(numK, false)));
     vector<vector<vector<bool>>> Fjk(numI+1, vector<vector<bool>>(numJ, vector<bool>(numK, false)));
     vector<vector<vector<bool>>> C(numI, vector<vector<bool>>(numJ, vector<bool>(numK, false)));
-        
+
     for (size_t i = 0; i < numI; ++i) {
         for (size_t j = 0; j < numJ; ++j) {
             for (size_t k = 0; k < numK; ++k) {
@@ -380,31 +380,31 @@ int char_binary_image_3d(vector<vector<vector<bool>>> input)
                     V[i+1][j][k+1]   = true;
                     V[i][j+1][k+1]   = true;
                     V[i+1][j+1][k+1] = true;
-                    
+
                     Ei[i][j][k]      = true;
                     Ei[i][j+1][k]    = true;
                     Ei[i][j][k+1]    = true;
                     Ei[i][j+1][k+1]  = true;
-                    
+
                     Ej[i][j][k]      = true;
                     Ej[i+1][j][k]    = true;
                     Ej[i][j][k+1]    = true;
                     Ej[i+1][j][k+1]  = true;
-                    
+
                     Ek[i][j][k]      = true;
                     Ek[i][j+1][k]    = true;
                     Ek[i+1][j][k]    = true;
                     Ek[i+1][j+1][k]  = true;
-                    
+
                     Fij[i][j][k]     = true;
                     Fij[i][j][k+1]   = true;
-                    
+
                     Fik[i][j][k]     = true;
                     Fik[i][j+1][k]   = true;
-                    
+
                     Fjk[i][j][k]     = true;
                     Fjk[i+1][j][k]   = true;
-                    
+
                     C[i][j][k]       = true;
                 }
             }
@@ -421,7 +421,7 @@ int char_binary_image_3d(vector<vector<vector<bool>>> input)
     int c = sum_bool_3d(C);
 
     int EC = v - ei - ej - ek + fij + fik + fjk - c;
-    
+
     return EC;
 }
 
@@ -483,12 +483,12 @@ vector<vector<int>> images_2d(const vector<vector<int>> &image1,
 {
     size_t numI = image1.size();
     size_t numJ = image1[0].size();
-    
+
     vector<vector<int>> surface(M1+1, vector<int>(M2+1, 0));
 
     // Padded images
-    vector<vector<int>> padded1 = pad_2d(image1, M1);
-    vector<vector<int>> padded2 = pad_2d(image2, M2);
+    vector<vector<int>> padded1 = pad_2d(image1, M1+1);
+    vector<vector<int>> padded2 = pad_2d(image2, M2+1);
 
     // Loop over all pixel in original image
     for (size_t i = 1; i < numI+1; ++i) {
@@ -498,10 +498,10 @@ vector<vector<int>> images_2d(const vector<vector<int>> &image1,
             vector<vector<bool>> binary_neigh1 = binary_neigh_pixel_2d(padded1, i, j, pixel_value1);
 
             vector<vector<int>> neigh2 = neigh_pixel_2d(padded2, i, j);
-            
+
             /* Sort and make unique pixels in neigh of padded2.
             These can be used to obtain thresholded neigh of
-            padded2 used to compute all the euler changes along a 
+            padded2 used to compute all the euler changes along a
             row of the euler surface.*/
             vector<int> indices_row(10, M2+1);
             int central_pixel = neigh2[1][1];
@@ -512,7 +512,7 @@ vector<vector<int>> images_2d(const vector<vector<int>> &image1,
                         indices_row[q + p*3] = pixel_value2;
                 }
             }
-            
+
             // Sort and make unique indices_row
             sort(indices_row.begin(), indices_row.end());
             auto last = unique(indices_row.begin(), indices_row.end());
@@ -521,7 +521,7 @@ vector<vector<int>> images_2d(const vector<vector<int>> &image1,
             for (size_t z = 0; z < indices_row.size()-1; ++z) {
                 size_t start = static_cast<size_t>(indices_row[z]);
                 size_t end   = static_cast<size_t>(indices_row[z+1]);
-                
+
                 vector<vector<bool>> binary_neigh2 = threshold_image_2d(neigh2, static_cast<int>(indices_row[z]));
                 vector<vector<bool>> binary_neigh = elementwise_AND_2d(binary_neigh1, binary_neigh2);
                 size_t num = number_from_neigh_2d(binary_neigh);
@@ -530,11 +530,11 @@ vector<vector<int>> images_2d(const vector<vector<int>> &image1,
                 for (size_t ind = start; ind < end; ++ind) {
                     surface[static_cast<size_t>(pixel_value1)][ind] += change;
                 }
-                
-            }    
+
+            }
         }
     }
-    
+
     //Cumulative sum along columns
     vector<int> row_before = surface[0];
     for (size_t s = 1; s < M1+1; ++s) {
@@ -571,19 +571,19 @@ vector<vector<int>> naive_images_3d(const vector<vector<vector<int>>> &image1,
 //================================================
 
 vector<vector<int>> images_3d(const vector<vector<vector<int>>> &image1,
-			      const vector<vector<vector<int>>> &image2,
+			                  const vector<vector<vector<int>>> &image2,
                               vector<int> vector_euler_changes,
                               int M1 = 255, int M2 = 255)
 {
     size_t numI = image1.size();
     size_t numJ = image1[0].size();
     size_t numK = image1[0][0].size();
-    
+
     vector<vector<int>> surface(M1+1, vector<int>(M2+1, 0));
-    
+
     // Padded images
-    vector<vector<vector<int>>> padded1 = pad_3d(image1, M1);
-    vector<vector<vector<int>>> padded2 = pad_3d(image2, M2);
+    vector<vector<vector<int>>> padded1 = pad_3d(image1, M1+1);
+    vector<vector<vector<int>>> padded2 = pad_3d(image2, M2+1);
 
     // Loop over all pixel in original image
     for (size_t i = 1; i < numI+1; ++i) {
@@ -598,10 +598,10 @@ vector<vector<int>> images_3d(const vector<vector<vector<int>>> &image1,
                 /* Sort and make unique voxels in neigh of padded2.
                    These can be used to obtain thresholded neigh of
                    padded2 used to compute all the euler changes
-                   along a row of the euler surface.*/ 
+                   along a row of the euler surface.*/
                 vector<int> indices_row(28, M2+1);  // 28=3^3+1
                 int central_voxel2 = padded2[i][j][k];
-                
+
                 for (size_t p = 0; p < 3; ++p) {
                     for (size_t q = 0; q < 3; ++q) {
                         for (size_t r = 0; r < 3; ++r) {
@@ -611,7 +611,7 @@ vector<vector<int>> images_3d(const vector<vector<vector<int>>> &image1,
                         }
                     }
                 }
-                
+
                 // Sort and make unique indices_row
                 sort(indices_row.begin(), indices_row.end());
                 auto last = unique(indices_row.begin(), indices_row.end());
@@ -620,7 +620,7 @@ vector<vector<int>> images_3d(const vector<vector<vector<int>>> &image1,
                 for (size_t z = 0; z < indices_row.size()-1; ++z) {
                     size_t start = static_cast<size_t>(indices_row[z]);
                     size_t end   = static_cast<size_t>(indices_row[z+1]);
-                    
+
                     vector<vector<vector<bool>>> binary_neigh2 = threshold_image_3d(neigh2, static_cast<int>(indices_row[z]));
                     vector<vector<vector<bool>>> binary_neigh = elementwise_AND_3d(binary_neigh1, binary_neigh2);
                     size_t num = number_from_neigh_3d(binary_neigh);
@@ -632,7 +632,7 @@ vector<vector<int>> images_3d(const vector<vector<vector<int>>> &image1,
             }
         }
     }
-    
+
     //Cumulative sum along columns
     vector<int> row_before = surface[0];
     for (size_t s = 1; s < M1+1; ++s) {
@@ -660,16 +660,16 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
 
     // we have 4 possible changes, from dim 0 to dim 3 maximum
     vector<int> possible_changes = {1, -1, 1, -1};
-    
+
     size_t number_simplices = dim_simplices.size();
 
-    
+
     // loop on simplices
     for (size_t i = 0; i < number_simplices; ++i) {
         size_t dim_simplex = dim_simplices[i];
         double par1 = parametrization1[i];
         double par2 = parametrization2[i];
-        
+
         // find bins indexes
         vector<double>::iterator lower1;
         lower1 = lower_bound(bins1.begin(), bins1.end(), par1);
@@ -678,7 +678,7 @@ vector<vector<int>> bifiltration(vector<int>    dim_simplices,
         vector<double>::iterator lower2;
         lower2 = lower_bound(bins2.begin(), bins2.end(), par2);
         size_t index_simplex_in_bins2 = lower2 - bins2.begin();
-        
+
         // update euler changes along rows
         for (size_t incr = 0; incr < num_cols - index_simplex_in_bins2; ++incr) {
             euler_char_surface[index_simplex_in_bins1][index_simplex_in_bins2+incr] += possible_changes[dim_simplex];
@@ -707,7 +707,7 @@ PYBIND11_MODULE(surface, m) {
     m.def("naive_images_3d", &naive_images_3d);
     m.def("images_3d", &images_3d);
     m.def("bifiltration", &bifiltration);
-    
+
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;
 #else

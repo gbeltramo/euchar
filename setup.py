@@ -70,7 +70,7 @@ surface = CMakeExtension(name="surface",
                          sourcedir="euchar/cppbinding/")
 setup(
     name='euchar',
-    version='0.1.5',
+    version='0.1.6',
     packages=find_packages("."),
     author="Gabriele Beltramo",
     author_email="gabri.beltramo@gmail.com",

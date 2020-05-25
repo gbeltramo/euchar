@@ -6,8 +6,21 @@ Compute Euler Characteristic curves and surfaces of image and point data.
 
 For the package to install correctly the prerequisites are
 
-- CMake version >= 3.8
-- pybind11 version >= 2.2
+- a `C++` compiler. Windows users need to install a recent version of
+[Visul Studio](https://visualstudio.microsoft.com/vs/)
+- `cmake` version >= 3.8
+- `pybind11` version >= 2.2
+
+It is recommended to install both `cmake` and `pybind11` via the `conda` command,
+which can be obtained by installing either [Anaconda](https://www.anaconda.com/)
+or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+With `conda` installed run the following commands in a terminal window.
+
+```
+$ conda install -c anaconda cmake
+$ conda install -c conda-forge pybind11
+```
 
 This module makes use of features provided by the following Python modules
 
@@ -16,12 +29,8 @@ This module makes use of features provided by the following Python modules
 - scipy, used to obtain Delaunay triangulations of 2D and 3d finite point sets
 - scikit-learn, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
 
-
-## Examples
-
-See the `/notebooks/` directory of the github page for usage examples.
-
-
 ## Documentation
 
-The documentation for this project is available at https://gbeltramo.github.io/euchar/
+The documentation for this project is available at https://gbeltramo.github.io/euchar/,
+where usage examples are also provided for computing both Euler characteristic
+curves and Euler characteristic surfaces.
