@@ -7,7 +7,7 @@ Compute Euler Characteristic curves and surfaces of image and point data.
 For the package to install correctly the prerequisites are
 
 - a `C++` compiler. Windows users need to install a recent version of
-[Visul Studio](https://visualstudio.microsoft.com/vs/)
+[Visual Studio](https://visualstudio.microsoft.com/vs/)
 - `cmake` version >= 3.8
 - `pybind11` version >= 2.2
 
@@ -32,5 +32,5 @@ This module makes use of features provided by the following Python modules
 ## Documentation
 
 The documentation for this project is available at https://gbeltramo.github.io/euchar/,
-where usage examples are also provided for computing both Euler characteristic
+where usage examples are provided for computing both Euler characteristic
 curves and Euler characteristic surfaces.
