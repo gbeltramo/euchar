@@ -26,7 +26,7 @@ This module makes use of features provided by the following Python modules
 
 - numpy
 - matplotlib, used in the display module of the package
-- scipy, used to obtain Delaunay triangulations of 2D and 3d finite point sets
+- scipy, used to obtain Delaunay triangulations of 2D and 3D finite point sets
 - scikit-learn, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
 
 ## Documentation
