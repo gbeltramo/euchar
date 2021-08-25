@@ -4,30 +4,36 @@ Compute Euler Characteristic curves and surfaces of image and point data.
 
 ## Installation
 
-For the package to install correctly the prerequisites are
+The `setuptools`, `numpy`, and `scipy` Python packages are
+prerequisites for using this package.
 
-- a `C++` compiler. Windows users need to install a recent version of
-[Visual Studio](https://visualstudio.microsoft.com/vs/)
-- `cmake` version >= 3.8
-- `pybind11` version >= 2.2
-
-It is recommended to install both `cmake` and `pybind11` via the `conda` command,
-which can be obtained by installing either [Anaconda](https://www.anaconda.com/)
-or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
-
-With `conda` installed run the following commands in a terminal window.
+You'll also need `pybind11`, `cmake` and a `C++` compiler in order to install this
+package. It is recommended to install both `pybind11` and `cmake` via `conda`.
 
 ```
-$ conda install -c anaconda cmake
-$ conda install -c conda-forge pybind11
+>>> conda install -c anaconda cmake
+>>> conda install -c conda-forge pybind11
 ```
 
-This module makes use of features provided by the following Python modules
+Finally run the following command to build and install this Python package
 
-- numpy
-- matplotlib, used in the display module of the package
-- scipy, used to obtain Delaunay triangulations of 2D and 3D finite point sets
-- scikit-learn, for nearest neighbours algorithm to obtain an estimate of the inverse of the local density in a finite set of points
+```
+>>> pip install euchar
+```
+
+If the command above fails to build this package, then you might want to clone
+this repository to a directory `euchar/` on your computer and run
+
+```
+>>> cd /<path>/<to>/<cloned>/<repo>/euchar/
+>>> python setup.py install
+```
+
+which outputs more information on the errors causing the build to fail.
+
+**Windows.** After installing `conda`, run the above commands within an
+`Anaconda prompt`. For the C++ compiler install
+<a href="https://visualstudio.microsoft.com/vs/">Visual Studio community</a>.
 
 ## Documentation
 
